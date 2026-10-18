@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Poster — Logic × Sáng tạo</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Source for images/posters/logic-sang-tao.jpg. Re-render:
+     msedge --headless --hide-scrollbars --window-size=1188,1680 --virtual-time-budget=6000 --screenshot=out.png design/poster.html -->
+<style>
+  :root { --bg: #08080a; --fg: #f3f1ea; --muted: #807f78; --line: rgba(243,241,234,0.14); --accent: #ff3b1d; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1188px; height: 1680px; overflow: hidden; background: var(--bg); }
+  body { position: relative; color: var(--fg); font-family: "Onest", sans-serif; }
+
+  .glow { position: absolute; inset: 0; background: radial-gradient(60% 40% at 50% 55%, rgba(255,59,29,0.22), transparent 70%); }
+  .grain { position: absolute; inset: 0; opacity: 0.16; mix-blend-mode: overlay; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .grid { position: absolute; inset: 64px; border: 1px solid var(--line); }
+  .grid::before, .grid::after { content: ""; position: absolute; background: var(--line); }
+  .grid::before { left: 33.33%; top: 0; bottom: 0; width: 1px; box-shadow: 352px 0 0 var(--line); }
+  .grid::after { left: 0; right: 0; top: 50%; height: 1px; }
+
+  .top { position: absolute; top: 96px; left: 96px; right: 96px; display: flex; justify-content: space-between; align-items: center; z-index: 5; }
+  .badge { width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid rgba(243,241,234,0.4); display: grid; place-items: center; font-weight: 600; font-size: 22px; }
+  .eyebrow { font-size: 18px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); }
+  .eyebrow b { color: var(--accent); font-weight: 600; }
+
+  .word { position: absolute; left: 0; right: 0; text-align: center; font-family: "Anton", sans-serif; text-transform: uppercase; line-height: 0.85; letter-spacing: -0.01em; }
+  .logic { top: 190px; font-size: 360px; color: transparent; -webkit-text-stroke: 2px var(--fg); z-index: 1; }
+  .sangtao { top: 1050px; font-size: 300px; color: var(--accent); z-index: 5; text-shadow: 0 20px 50px rgba(0,0,0,0.45); }
+
+  .sun { position: absolute; left: 50%; top: 820px; width: 620px; height: 620px; margin: -310px 0 0 -310px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ff6a3d, var(--accent) 55%, #b3200a); z-index: 1; }
+  .ring { position: absolute; left: 50%; top: 820px; border-radius: 50%; border: 1.5px dashed rgba(243,241,234,0.25); transform: translate(-50%, -50%); z-index: 1; }
+
+  .portrait { position: absolute; left: 50%; bottom: 300px; height: 1080px; transform: translateX(-50%); z-index: 3; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.6)); }
+  .fade { position: absolute; left: 0; right: 0; bottom: 280px; height: 240px; background: linear-gradient(transparent, var(--bg)); z-index: 4; }
+
+  .side { position: absolute; top: 40%; font-size: 17px; font-weight: 500; letter-spacing: 0.32em; text-transform: uppercase; color: var(--muted); white-space: nowrap; z-index: 5; }
+  .side.l { left: 84px; transform: translate(-50%, -50%) rotate(-90deg); transform-origin: center; margin-left: 12px; }
+  .side.r { right: 84px; transform: translate(50%, -50%) rotate(90deg); margin-right: 12px; }
+
+  .pix { position: absolute; background: var(--accent); z-index: 5; }
+
+  .bottom { position: absolute; left: 96px; right: 96px; bottom: 96px; z-index: 5; }
+  .name { font-family: "Anton", sans-serif; font-size: 120px; line-height: 0.9; text-transform: uppercase; }
+  .name span { color: var(--accent); }
+  .meta { margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: flex-end; }
+  .meta-col { display: flex; flex-direction: column; gap: 10px; }
+  .meta-val { font-size: 26px; font-weight: 600; }
+  .barcode { width: 200px; height: 56px; opacity: 0.7; background: repeating-linear-gradient(90deg, var(--fg) 0 3px, transparent 3px 6px, var(--fg) 6px 8px, transparent 8px 12px, var(--fg) 12px 17px, transparent 17px 20px); }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="grid"></div>
+
+  <div class="top">
+    <div class="badge">HV</div>
+    <div class="eyebrow">Portfolio <b>·</b> 2026</div>
+    <div class="eyebrow">Nº <b>06</b></div>
+  </div>
+
+  <div class="word logic">Logic</div>
+
+  <div class="ring" style="width: 780px; height: 780px;"></div>
+  <div class="ring" style="width: 940px; height: 940px; opacity: 0.6;"></div>
+  <div class="sun"></div>
+
+  <div class="word sangtao">Sáng tạo</div>
+  <img class="portrait" src="../images/hvu.svg" alt="">
+  <div class="fade"></div>
+
+  <div class="side l">Web Developer — UI/UX Designer</div>
+  <div class="side r">Design × Code — Hà Nội</div>
+
+  <!-- pixel confetti echoing the pixel-art portrait -->
+  <div class="pix" style="left: 210px; top: 700px; width: 18px; height: 18px;"></div>
+  <div class="pix" style="left: 236px; top: 726px; width: 10px; height: 10px; opacity: .6;"></div>
+  <div class="pix" style="right: 220px; top: 610px; width: 14px; height: 14px;"></div>
+  <div class="pix" style="right: 250px; top: 950px; width: 22px; height: 22px; opacity: .8;"></div>
+  <div class="pix" style="left: 300px; top: 1000px; width: 12px; height: 12px; opacity: .5;"></div>
+
+  <div class="bottom">
+    <div class="name">Lê Hoàng <span>Vũ</span></div>
+    <div class="meta">
+      <div class="meta-col"><span class="eyebrow">Học vấn</span><span class="meta-val">UET — VNU</span></div>
+      <div class="meta-col"><span class="eyebrow">Khoá</span><span class="meta-val">K68GAT</span></div>
+      <div class="meta-col"><span class="eyebrow">Liên hệ</span><span class="meta-val">vle751836@gmail.com</span></div>
+      <div class="barcode"></div>
+    </div>
+  </div>
+
+  <div class="grain"></div>
+</body>
+</html>

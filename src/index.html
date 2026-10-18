@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hoang Vu — Web developer, UI UX Designer</title>
+  <title>Hoàng Vũ — Lập trình viên Web, Nhà thiết kế UI/UX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
@@ -34,6 +34,7 @@
       --accent-2: #ff6a3d;
       --font-display: "Anton", sans-serif;
       --font-sans: "Onest", sans-serif;
+      --text-eyebrow: 0.8125rem;
       --gutter: 2.5rem;
       --section: 9rem;
     }
@@ -79,15 +80,11 @@
     .hero-name-font { font-size: 13rem; line-height: 0.86; }
     .hero-role-font { font-size: 1.75rem; line-height: 1.15; }
     .section-heading-font { font-size: 3.25rem; line-height: 1; }
-    .contact-heading-font { font-size: 5rem; line-height: 0.95; }
-    .email-font { font-size: 1.75rem; line-height: 1.15; gap: 0.75rem; }
     
     @media (min-width: 640px) {
       .hero-name-font { font-size: 28rem; line-height: 0.78; }
       .hero-role-font { font-size: 3.25rem; line-height: 1; }
       .section-heading-font { font-size: 5rem; line-height: 0.95; }
-      .contact-heading-font { font-size: 7.5rem; line-height: 0.9; }
-      .email-font { font-size: 5rem; line-height: 0.95; gap: 1rem; }
     }
 
     /* GRID & LAYOUT */
@@ -155,7 +152,8 @@
     .reveal-letter { display: inline-block; transform: translateY(100%); opacity: 0; transition: transform 900ms cubic-bezier(0.16,1,0.3,1), opacity 900ms cubic-bezier(0.16,1,0.3,1); }
     .hero-section.is-revealed .reveal-letter { transform: translateY(0); opacity: 1; }
 
-    .reveal-line-wrap { overflow: hidden; display: block; }
+    /* padding gives Vietnamese uppercase diacritics room inside the clip; negative margin keeps line spacing */
+    .reveal-line-wrap { overflow: hidden; display: block; padding-top: 0.2em; margin-top: -0.2em; }
     .reveal-line { display: block; transform: translateY(110%); opacity: 0; transition: transform 900ms cubic-bezier(0.16,1,0.3,1), opacity 900ms cubic-bezier(0.16,1,0.3,1); }
     .hero-section.is-revealed .reveal-line, .is-revealed .reveal-line, .is-revealed.reveal-line { transform: translateY(0); opacity: 1; }
 
@@ -191,11 +189,6 @@
     .liquid-image-wrapper:not(.bare) { background: radial-gradient(130% 130% at 30% 15%, var(--surface-2), var(--background)); }
     .liquid-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; }
     .liquid-overlay { position: absolute; inset: 0; pointer-events: none; }
-    .grayscale-veil { background: #000; mix-blend-mode: color; opacity: 0.88; transition: opacity 380ms ease-out; }
-    .liquid-image-wrapper:hover .grayscale-veil { opacity: 0; }
-    .accent-glow { background: linear-gradient(120deg, transparent 30%, color-mix(in srgb, var(--accent) 35%, transparent) 50%, transparent 70%); opacity: 0; transition: opacity 380ms ease-out; }
-    .liquid-image-wrapper:hover .accent-glow { opacity: 1; }
-    .vignette { background: radial-gradient(120% 120% at 50% 120%, color-mix(in srgb, #08080a 70%, transparent), transparent 60%); }
 
     /* MARQUEE */
     .marquee-section { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 2rem 0; }
@@ -205,65 +198,127 @@
     .marquee-dot { margin-inline: 2rem; width: 0.625rem; height: 0.625rem; border-radius: 9999px; background: var(--accent); flex-shrink: 0; }
     @keyframes marquee { to { transform: translateX(-50%); } }
 
-    /* STORY */
-    .principles-list { border-top: 1px solid var(--line); }
-    .principle-item { display: grid; grid-template-columns: auto 1fr; column-gap: 1.5rem; border-bottom: 1px solid var(--line); padding: 2rem 0; }
-    .principle-num { font-family: var(--font-sans); font-size: 1.75rem; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--accent); }
-    .principle-title { font-family: var(--font-sans); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; }
+    /* SHARED BLOCKS */
+    .block-title { display: flex; align-items: baseline; gap: 0.75rem; font-family: var(--font-display); font-size: 2rem; line-height: 1; text-transform: uppercase; letter-spacing: -0.01em; }
+    .block-title-num { font-family: var(--font-sans); font-size: var(--text-eyebrow); font-weight: 600; letter-spacing: 0.18em; color: var(--accent); }
+    .block + .block { margin-top: 5rem; }
 
-    /* VENTURES */
-    .ventures-header { display: flex; flex-direction: column; gap: 1rem; }
-    @media (min-width: 640px) { .ventures-header { flex-direction: row; align-items: flex-end; justify-content: space-between; } }
-    .ventures-grid { display: grid; grid-template-columns: 1fr; row-gap: 4rem; column-gap: var(--gutter); margin-top: 4rem; }
-    @media (min-width: 768px) { .ventures-grid { grid-template-columns: repeat(2, 1fr); } .venture-card.offset-down { margin-top: 6rem; } }
-    .venture-row { margin-top: 1.5rem; border-top: 1px solid var(--line); padding-top: 1.25rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; }
-    .venture-name { font-family: var(--font-sans); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; transition: color 340ms ease-out; }
-    .group:hover .venture-name { color: var(--accent); }
-
-    /* IMPACT */
-    .stats-grid { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); margin-top: 4rem; }
-    .stat-cell { display: flex; flex-direction: column; gap: 1rem; border-bottom: 1px solid var(--line); padding: 2.5rem 0; }
-    @media (min-width: 640px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-cell:nth-child(even) { border-left: 1px solid var(--line); padding-left: 2rem; }
+    /* PROFILE */
+    .profile-grid { margin-top: 4rem; align-items: start; }
+    .id-stage { perspective: 1400px; max-width: 26rem; margin-inline: auto; width: 100%; }
+    @media (min-width: 1024px) { .id-stage { position: sticky; top: 7rem; margin-inline: 0; } }
+    .id-card {
+      position: relative; aspect-ratio: 5/7; display: flex; flex-direction: column; padding: 1.5rem;
+      border-radius: 1rem; border: 1px solid var(--line-strong);
+      background: linear-gradient(160deg, var(--surface-2), var(--surface) 55%, #0c0c0f);
+      box-shadow: 0 2.5rem 5rem -1.5rem rgba(0,0,0,0.8);
+      transform-style: preserve-3d; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+      transition: transform 450ms cubic-bezier(0.16,1,0.3,1);
     }
-    @media (min-width: 1024px) {
-      .stats-grid { grid-template-columns: repeat(4, 1fr); }
-      .stat-cell { padding: 3rem 0; }
-      .stat-cell:nth-child(even) { border-left: none; padding-left: 0; }
-      .stat-cell:not(:nth-child(4n+1)) { border-left: 1px solid var(--line); padding-left: 2rem; }
-    }
-    .stat-figure { font-family: var(--font-display); font-size: 7.5rem; line-height: 1; letter-spacing: -0.01em; color: var(--foreground); transition: color 340ms ease-out; }
-    .stat-cell:hover .stat-figure { color: var(--accent); }
+    /* children float at different depths → parallax inside the card */
+    .id-card > * { transform: translateZ(var(--z, 0px)); }
+    .id-card-top { --z: 30px; display: flex; align-items: center; justify-content: space-between; }
+    .id-photo { --z: 55px; position: relative; flex: 1; min-height: 0; margin: 1.25rem 0; border-radius: 0.5rem; overflow: hidden; background: #1a3570; }
+    .id-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; image-rendering: pixelated; filter: grayscale(1) contrast(1.05); transition: filter 500ms ease-out; }
+    .id-card:hover .id-photo img { filter: none; }
+    .id-name { --z: 80px; font-family: var(--font-display); font-size: 3.25rem; line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
+    .id-meta { --z: 40px; margin-top: 1rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+    .id-barcode { height: 1.75rem; width: 7rem; flex-shrink: 0; opacity: 0.55; background: repeating-linear-gradient(90deg, var(--foreground) 0 2px, transparent 2px 4px, var(--foreground) 4px 5px, transparent 5px 8px, var(--foreground) 8px 11px, transparent 11px 13px); }
+    .id-glare { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; transform: translateZ(90px); background: radial-gradient(circle at var(--gx, 30%) var(--gy, 0%), rgba(255,255,255,0.14), transparent 50%); }
 
-    /* VOICES */
-    .voices-panel { display: grid; grid-template-columns: 1fr; align-items: flex-start; gap: 2rem; }
-    .voices-panel blockquote { order: 2; margin: 0; padding: 0; }
-    .voices-panel figure { order: 1; aspect-ratio: 4/5; width: 100%; }
-    @media (min-width: 640px) {
-      .voices-panel { grid-template-columns: 1fr auto; }
-      .voices-panel blockquote { order: 1; }
-      .voices-panel figure { order: 2; width: 16rem; }
-    }
-    .voice-btn { display: flex; align-items: baseline; gap: 1.25rem; border-top: 1px solid var(--line); padding: 1.75rem 0; width: 100%; text-align: left; }
-    .voice-btn:last-child { border-bottom: 1px solid var(--line); }
-    .voice-btn-index { font-size: var(--text-eyebrow); font-variant-numeric: tabular-nums; letter-spacing: 0.18em; color: var(--muted); transition: color 0.3s; }
-    .voice-btn-name { font-family: var(--font-sans); font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; color: var(--muted); transition: color 0.3s; }
-    .voice-btn-rule { height: 1px; background: var(--accent); width: 0; transition: width 0.3s ease; margin-left: auto; }
-    .voice-btn.is-active .voice-btn-index { color: var(--accent); }
-    .voice-btn.is-active .voice-btn-name { color: var(--foreground); }
-    .voice-btn.is-active .voice-btn-rule { width: 2.5rem; }
+    .info-list { display: grid; grid-template-columns: 1fr; margin-top: 1.5rem; border-top: 1px solid var(--line); }
+    @media (min-width: 640px) { .info-list { grid-template-columns: 1fr 1fr; column-gap: var(--gutter); } }
+    .info-item { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.5rem 0; border-bottom: 1px solid var(--line); }
+    .info-value { font-size: 1.375rem; font-weight: 500; line-height: 1.35; letter-spacing: -0.01em; }
+    a.info-value, .info-link { transition: color 0.3s; }
+    a.info-value:hover, .info-link:hover { color: var(--accent); }
+    .info-link { font-size: 1.0625rem; color: var(--muted); }
 
-    /* CONTACT / FOOTER */
-    .footer-section { padding-top: var(--section); padding-inline: var(--gutter); }
-    .email-link { display: inline-flex; align-items: baseline; font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.01em; word-break: break-all; transition: transform 340ms ease-out, color 340ms ease-out; margin-top: 3rem; }
-    .email-link:hover { transform: translateX(14px); color: var(--accent); }
-    .footer-bar { margin-top: var(--section); border-top: 1px solid var(--line); padding: 3rem 0; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
-    @media (min-width: 1024px) { .footer-bar { grid-template-columns: repeat(12, 1fr); } }
-    .social-links a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--muted); transition: color 0.3s; font-size: 1.0625rem; }
-    .social-links a::before { content: ""; display: block; height: 1px; width: 0; background: var(--accent); transition: width 0.3s ease; }
-    .social-links a:hover { color: var(--foreground); }
-    .social-links a:hover::before { width: 1.5rem; }
+    .exp-row { padding: 1.75rem 0; border-bottom: 1px solid var(--line); }
+    .exp-row:first-child { border-top: 1px solid var(--line); }
+    .exp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+    .exp-role { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; }
+    .exp-dur { font-family: var(--font-display); font-size: 1.75rem; line-height: 1; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+    .exp-dur.is-muted { color: var(--muted); }
+    .exp-bar { position: relative; height: 2px; margin-top: 1.25rem; overflow: hidden; background: var(--line); }
+    .exp-bar.is-dashed { background: repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px); }
+    .exp-bar::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); transition: transform 1400ms cubic-bezier(0.16,1,0.3,1) 250ms; }
+    .exp-row.is-revealed .exp-bar::after { transform: scaleX(var(--p)); }
+
+    .skill-groups { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 1.5rem; }
+    @media (min-width: 640px) { .skill-groups { grid-template-columns: repeat(3, 1fr); gap: var(--gutter); } }
+    .chip-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .chip { padding: 0.5rem 1rem; border: 1px solid var(--line-strong); border-radius: 9999px; font-size: 1rem; transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s; }
+    .chip:hover { background: var(--accent); border-color: var(--accent); color: var(--background); transform: translateY(-3px); }
+
+    /* ACHIEVEMENTS */
+    .proof-grid { margin-top: 4rem; align-items: center; }
+    .proof-tab { display: flex; align-items: baseline; gap: 1.25rem; width: 100%; padding: 1.5rem 0; border-top: 1px solid var(--line); text-align: left; }
+    .proof-tabs li:last-child .proof-tab { border-bottom: 1px solid var(--line); }
+    .proof-tab-index { font-size: var(--text-eyebrow); font-variant-numeric: tabular-nums; letter-spacing: 0.18em; color: var(--muted); transition: color 0.3s; }
+    .proof-tab-name { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; color: var(--muted); transition: color 0.3s; }
+    .proof-tab-sub { margin-top: 0.25rem; font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); opacity: 0.7; }
+    .proof-tab-rule { height: 1px; width: 0; margin-left: auto; align-self: center; background: var(--accent); transition: width 0.3s ease; }
+    .proof-tab:hover .proof-tab-name { color: var(--foreground); }
+    .proof-tab.is-active .proof-tab-index { color: var(--accent); }
+    .proof-tab.is-active .proof-tab-name { color: var(--foreground); }
+    .proof-tab.is-active .proof-tab-rule { width: 2.5rem; }
+
+    .proof-stage {
+      --fw: min(22rem, 72vw); --fh: 32rem; --r: calc(var(--fw) * 0.95);
+      position: relative; height: calc(var(--fh) + 4rem); perspective: 1600px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 14%, #000 86%, transparent);
+    }
+    .proof-ring {
+      position: absolute; left: 50%; top: 50%; width: var(--fw); height: var(--fh);
+      margin-left: calc(var(--fw) / -2); margin-top: calc(var(--fh) / -2);
+      transform-style: preserve-3d;
+      transform: translateZ(calc(var(--r) * -1)) rotateX(var(--rx, 0deg)) rotateY(calc(var(--angle, 0deg) + var(--ry, 0deg)));
+      transition: transform 900ms cubic-bezier(0.16,1,0.3,1);
+    }
+    .proof-face {
+      position: absolute; inset: 0; display: flex; flex-direction: column; padding: 2rem; overflow: hidden;
+      border-radius: 1rem; border: 1px solid var(--line-strong); cursor: pointer;
+      background: radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--accent) 0%, transparent), transparent 60%), linear-gradient(160deg, var(--surface-2), var(--surface));
+      transform: rotateY(calc(var(--i) * 60deg)) translateZ(var(--r));
+      backface-visibility: hidden; opacity: 0.3; transition: opacity 600ms ease-out, border-color 600ms ease-out, background 600ms ease-out;
+    }
+    .proof-face.is-active {
+      opacity: 1; border-color: color-mix(in srgb, var(--accent) 70%, transparent); cursor: default;
+      background: radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 60%), linear-gradient(160deg, var(--surface-2), var(--surface));
+    }
+    .proof-face-top { display: flex; align-items: center; justify-content: space-between; }
+    .proof-num { font-family: var(--font-display); font-size: 1.75rem; line-height: 1; color: var(--accent); }
+    .proof-glyph { flex: 1; display: grid; place-items: center; font-family: var(--font-display); font-size: 8.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--line-strong); transition: -webkit-text-stroke-color 600ms; }
+    .proof-face.is-active .proof-glyph { -webkit-text-stroke-color: var(--accent); }
+    .proof-title { font-family: var(--font-display); font-size: 3.25rem; line-height: 1; text-transform: uppercase; letter-spacing: -0.01em; }
+    .proof-face p { margin-top: 0.75rem; }
+    .proof-cta { display: inline-flex; align-items: center; gap: 0.5rem; align-self: flex-start; margin-top: 1.5rem; padding: 0.75rem 1.25rem; border: 1px solid var(--line-strong); border-radius: 9999px; font-weight: 500; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+    .proof-cta:hover { background: var(--accent); border-color: var(--accent); color: var(--background); }
+    .proof-cta:hover .text-accent { color: inherit; }
+    .proof-face:not(.is-active) .proof-cta { pointer-events: none; }
+    .proof-ctas { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+    .proof-ctas .proof-cta { margin-top: 0; padding: 0.5rem 0.875rem; font-size: 0.9375rem; }
+    .proof-cta.is-pending { color: var(--muted); border-style: dashed; pointer-events: none; }
+    .proof-media { flex-shrink: 0; aspect-ratio: 16/9; margin: auto 0 1.25rem; border-radius: 0.5rem; overflow: hidden; background: #000; border: 1px solid var(--line); }
+    .proof-media video { width: 100%; height: 100%; object-fit: cover; }
+    .proof-media.is-poster { display: block; width: 100%; aspect-ratio: 16/10; padding: 0.75rem; cursor: zoom-in; background: radial-gradient(80% 80% at 50% 40%, color-mix(in srgb, var(--accent) 25%, transparent), #000); }
+    .proof-media.is-poster img { height: 100%; margin: 0 auto; border-radius: 0.25rem; box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.6); transform: rotate(-3deg); transition: transform 500ms cubic-bezier(0.16,1,0.3,1); }
+    .proof-media.is-poster:hover img { transform: rotate(0deg) scale(1.04); }
+    .proof-face:not(.is-active) .proof-media { pointer-events: none; }
+
+    .lightbox { margin: auto; max-width: min(92vw, 70rem); max-height: 92vh; padding: 0; border: 1px solid var(--line-strong); border-radius: 0.75rem; background: var(--surface); color: var(--foreground); overflow: visible; }
+    .lightbox::backdrop { background: rgba(8,8,10,0.85); backdrop-filter: blur(6px); }
+    .lightbox[open] { animation: lightbox-in 420ms cubic-bezier(0.16,1,0.3,1); }
+    @keyframes lightbox-in { from { opacity: 0; transform: translateY(24px) scale(0.97); } }
+    .lightbox-body img, .lightbox-body video { display: block; max-width: 100%; max-height: 88vh; margin: auto; border-radius: 0.75rem; }
+    .lightbox-close { position: absolute; top: -1rem; right: -1rem; z-index: 1; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 9999px; background: var(--accent); color: var(--background); font-size: 1.125rem; }
+    @media (max-width: 639px) { .lightbox-close { top: 0.5rem; right: 0.5rem; } }
+    .proof-controls { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+    .proof-arrow { display: grid; place-items: center; width: 3rem; height: 3rem; border: 1px solid var(--line-strong); border-radius: 9999px; font-size: 1.25rem; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+    .proof-arrow:hover { background: var(--accent); border-color: var(--accent); color: var(--background); }
+    .proof-counter { font-size: var(--text-eyebrow); font-variant-numeric: tabular-nums; letter-spacing: 0.22em; color: var(--muted); }
 
     /* REDUCED MOTION */
     @media (prefers-reduced-motion: reduce) {
@@ -271,6 +326,7 @@
       .marquee-track { animation: none !important; }
       .reveal-letter, .reveal-line, .fade-slide-up, .word-inner, .fade-scale-in, .reveal-word-inner, .mobile-link { transform: none !important; opacity: 1 !important; transition: none !important; }
       #preloader { display: none !important; }
+      .exp-row .exp-bar::after { transform: scaleX(var(--p)) !important; }
     }
   </style>
 </head>
@@ -280,7 +336,7 @@
   <!-- PRELOADER -->
   <div id="preloader" class="preloader">
     <div class="preloader-bg"></div>
-    <div class="preloader-label">Hoang Vu</div>
+    <div class="preloader-label">Hoàng Vũ</div>
     <div class="preloader-counter"><span id="pct">0</span><span class="text-accent">%</span></div>
   </div>
 
@@ -289,14 +345,11 @@
     <nav class="sitenav-inner">
       <a href="#top" class="logo">
         <div class="logo-badge">HV</div>
-        <div class="logo-text">Hoang Vu</div>
+        <div class="logo-text">Hoàng Vũ</div>
       </a>
       <ul class="desktop-links">
-        <li><a href="#story" class="nav-link">About</a></li>
-        <li><a href="#ventures" class="nav-link">Ventures</a></li>
-        <li><a href="#impact" class="nav-link">Impact</a></li>
-        <li><a href="#voices" class="nav-link">Voices</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#profile" class="nav-link">Hồ sơ</a></li>
+        <li><a href="#achievements" class="nav-link">Thành tích</a></li>
       </ul>
       <button class="burger" id="burger-btn">
         <span></span><span></span><span></span>
@@ -307,11 +360,8 @@
   <!-- MOBILE MENU -->
   <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-links">
-       <a href="#story" class="mobile-link" style="transition-delay: 120ms">Story</a>
-       <a href="#ventures" class="mobile-link" style="transition-delay: 180ms">Ventures</a>
-       <a href="#impact" class="mobile-link" style="transition-delay: 240ms">Impact</a>
-       <a href="#voices" class="mobile-link" style="transition-delay: 300ms">Voices</a>
-       <a href="#contact" class="mobile-link" style="transition-delay: 360ms">Contact</a>
+       <a href="#profile" class="mobile-link" style="transition-delay: 180ms">Hồ sơ</a>
+       <a href="#achievements" class="mobile-link" style="transition-delay: 240ms">Thành tích</a>
     </div>
   </div>
 
@@ -321,16 +371,16 @@
       <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-top-row">
         <h2 class="hero-roles text-foreground uppercase font-display hero-role-font">
-          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 2700ms">Web developer</span></div>
-          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 2780ms">UI UX Designer</span></div>
+          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 2700ms">Lập trình viên Web</span></div>
+          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 2780ms">Thiết kế UI/UX</span></div>
         </h2>
         <p class="hero-desc text-body text-muted fade-slide-up" style="transition-delay: 2900ms">
-          This site is built as a visual portfolio to help you easily evaluate my design thinking, coding skills, and end-to-end product development process.
+          Trang web này là một portfolio trực quan, giúp bạn dễ dàng đánh giá tư duy thiết kế, kỹ năng lập trình và quy trình phát triển sản phẩm trọn vẹn của tôi.
         </p>
       </div>
       
       <figure class="hero-portrait-col liquid-image-wrapper bare" data-filter-id="liq-hero">
-         <img src="../images/hvu.svg" class="liquid-media" style="filter:url(#liq-hero); object-fit: contain;" alt="Hero Portrait" />
+         <img src="../images/hvu.svg" class="liquid-media" style="filter:url(#liq-hero); object-fit: contain;" alt="Chân dung Hoàng Vũ" />
       </figure>
       <div class="hero-gradient"></div>
       
@@ -350,12 +400,12 @@
       
       <div class="scroll-cue fade-slide-up" style="transition-delay: 3400ms">
         <div class="scroll-rule"></div>
-        Scroll to enter
+        Cuộn để khám phá
       </div>
     </section>
 
     <!-- MARQUEE -->
-    <section aria-label="Operating principles" class="marquee-section">
+    <section aria-label="Học vấn" class="marquee-section">
       <div class="marquee-track">
         <div class="marquee-content">
           <span>K68GAT</span><span class="marquee-dot"></span>
@@ -382,285 +432,183 @@
       </div>
     </section>
 
-    <!-- STORY -->
-    <section id="story" class="section">
-      <div class="grid-12">
-        <div class="col-6">
-          <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">About</span></div>
-          <h2 class="section-heading-font font-display uppercase reveal-on-scroll" style="margin-top: 1.5rem; max-width: 16ch;">
-            <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms; display: inline-block; background-color: var(--accent); color: var(--background); padding: 0 0.02em;">BRIDGING</span></div>
-            <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 90ms; display: inline-block; background-color: var(--accent); color: var(--background); padding: 0 0.02em;">LOGIC AND</span></div>
-            <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 180ms; display: inline-block; background-color: var(--accent); color: var(--background); padding: 0 0.02em;">CREATIVITY</span></div>
-          </h2>
-          <p class="text-lead text-muted fade-slide-up reveal-on-scroll" style="margin-top: 2rem; max-width: 46ch;">
-            Throughout my university journey, I constantly found myself at a crossroads — torn between the analytical power of Artificial Intelligence and the intuitive beauty of Web Development and UI/UX design. Rather than choosing just one, I chose to bridge them.
-          </p>
-        </div>
-        <div class="col-6" style="padding-top: 0.5rem;">
-          <ul class="principles-list reveal-on-scroll">
-            <li class="principle-item fade-slide-up" style="transition-delay: 0ms">
-              <div class="principle-num">01</div>
-              <div>
-                <h3 class="principle-title">Academic & Research Foundation</h3>
-                <p class="text-body text-muted" style="margin-top: 0.75rem; max-width: 44ch;">UET - VNU IT student. Passionate about AI programming competitions, computer science research, and strong algorithmic problem-solving.</p>
-              </div>
-            </li>
-            <li class="principle-item fade-slide-up" style="transition-delay: 90ms">
-              <div class="principle-num">02</div>
-              <div>
-                <h3 class="principle-title">Passion for Digital Aesthetics</h3>
-                <p class="text-body text-muted" style="margin-top: 0.75rem; max-width: 44ch;">Blending logic with creativity through self-driven mastery of UI/UX principles, design systems, and visual storytelling.</p>
-              </div>
-            </li>
-            <li class="principle-item fade-slide-up" style="transition-delay: 180ms">
-              <div class="principle-num">03</div>
-              <div>
-                <h3 class="principle-title">Hands-on Execution</h3>
-                <p class="text-body text-muted" style="margin-top: 0.75rem; max-width: 44ch;">Turning concepts into reality through full-lifecycle development — from Figma prototypes to polished frontend code.</p>
-              </div>
-            </li>
-            <li class="principle-item fade-slide-up" style="transition-delay: 270ms; border-bottom: none;">
-              <div class="principle-num">04</div>
-              <div>
-                <h3 class="principle-title">Driven by Collaboration</h3>
-                <p class="text-body text-muted" style="margin-top: 0.75rem; max-width: 44ch;">Constantly exploring new web technologies, 3D interactions, and seeking opportunities to build impactful digital solutions.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- VENTURES -->
-    <section id="ventures" class="section">
-      <div class="ventures-header">
-        <div>
-          <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Selected Ventures</span></div>
-          <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem; max-width: 14ch;">
-            <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">The work that</span></div>
-            <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 90ms">moved markets.</span></div>
-          </h2>
-        </div>
-        <div class="text-eyebrow uppercase text-muted" style="letter-spacing: 0.22em;">04 / Companies</div>
-      </div>
-      
-      <ul class="ventures-grid reveal-on-scroll">
-        <!-- V1 -->
-        <li class="fade-slide-up" style="transition-delay: 0ms">
-          <article class="group">
-            <figure class="liquid-image-wrapper" data-filter-id="liq-v0" style="aspect-ratio: 16/11;">
-              <img src="../images/2.svg" alt="Helix Robotics" class="liquid-media" />
-              <div class="liquid-overlay grayscale-veil"></div>
-              <div class="liquid-overlay accent-glow"></div>
-              <div class="liquid-overlay vignette"></div>
-            </figure>
-            <div class="venture-row">
-              <div>
-                <h3 class="venture-name">Helix Robotics</h3>
-                <p class="text-body text-muted" style="margin-top: 0.5rem; max-width: 42ch;">Reinvented warehouse logistics with autonomous fleets now running in 40 countries.</p>
-              </div>
-              <div style="text-align: right; flex-shrink: 0;">
-                <div class="text-eyebrow uppercase text-muted" style="letter-spacing: 0.18em;">2019</div>
-                <div class="text-eyebrow uppercase text-accent font-weight-500" style="margin-top: 0.5rem; letter-spacing: 0.18em;">Acquired — $1.1B</div>
-              </div>
-            </div>
-            <div class="text-eyebrow uppercase text-muted" style="margin-top: 0.75rem; letter-spacing: 0.22em;">Industrial Automation</div>
-          </article>
-        </li>
-        <!-- V2 -->
-        <li class="fade-slide-up offset-down" style="transition-delay: 120ms">
-          <article class="group">
-            <figure class="liquid-image-wrapper" data-filter-id="liq-v1" style="aspect-ratio: 16/11;">
-              <img src="../images/3.svg" alt="Northwind Energy" class="liquid-media" />
-              <div class="liquid-overlay grayscale-veil"></div>
-              <div class="liquid-overlay accent-glow"></div>
-              <div class="liquid-overlay vignette"></div>
-            </figure>
-            <div class="venture-row">
-              <div>
-                <h3 class="venture-name">Northwind Energy</h3>
-                <p class="text-body text-muted" style="margin-top: 0.5rem; max-width: 42ch;">Brought utility-scale storage to the grid years before the market believed it was viable.</p>
-              </div>
-              <div style="text-align: right; flex-shrink: 0;">
-                <div class="text-eyebrow uppercase text-muted" style="letter-spacing: 0.18em;">2015</div>
-                <div class="text-eyebrow uppercase text-accent font-weight-500" style="margin-top: 0.5rem; letter-spacing: 0.18em;">IPO — NYSE: NWND</div>
-              </div>
-            </div>
-            <div class="text-eyebrow uppercase text-muted" style="margin-top: 0.75rem; letter-spacing: 0.22em;">Climate Infrastructure</div>
-          </article>
-        </li>
-        <!-- V3 -->
-        <li class="fade-slide-up" style="transition-delay: 240ms">
-          <article class="group">
-            <figure class="liquid-image-wrapper" data-filter-id="liq-v2" style="aspect-ratio: 16/11;">
-              <img src="../images/4.svg" alt="Cadence Health" class="liquid-media" />
-              <div class="liquid-overlay grayscale-veil"></div>
-              <div class="liquid-overlay accent-glow"></div>
-              <div class="liquid-overlay vignette"></div>
-            </figure>
-            <div class="venture-row">
-              <div>
-                <h3 class="venture-name">Cadence Health</h3>
-                <p class="text-body text-muted" style="margin-top: 0.5rem; max-width: 42ch;">Put a clinician in every pocket and rewired how chronic care gets delivered.</p>
-              </div>
-              <div style="text-align: right; flex-shrink: 0;">
-                <div class="text-eyebrow uppercase text-muted" style="letter-spacing: 0.18em;">2011</div>
-                <div class="text-eyebrow uppercase text-accent font-weight-500" style="margin-top: 0.5rem; letter-spacing: 0.18em;">Acquired — $640M</div>
-              </div>
-            </div>
-            <div class="text-eyebrow uppercase text-muted" style="margin-top: 0.75rem; letter-spacing: 0.22em;">Digital Medicine</div>
-          </article>
-        </li>
-        <!-- V4 -->
-        <li class="fade-slide-up offset-down" style="transition-delay: 360ms">
-          <article class="group">
-            <figure class="liquid-image-wrapper" data-filter-id="liq-v3" style="aspect-ratio: 16/11;">
-              <img src="../images/5.svg" alt="Vane Capital" class="liquid-media" />
-              <div class="liquid-overlay grayscale-veil"></div>
-              <div class="liquid-overlay accent-glow"></div>
-              <div class="liquid-overlay vignette"></div>
-            </figure>
-            <div class="venture-row">
-              <div>
-                <h3 class="venture-name">Vane Capital</h3>
-                <p class="text-body text-muted" style="margin-top: 0.5rem; max-width: 42ch;">Backing the next generation of contrarian founders building hard, durable companies.</p>
-              </div>
-              <div style="text-align: right; flex-shrink: 0;">
-                <div class="text-eyebrow uppercase text-muted" style="letter-spacing: 0.18em;">2008</div>
-                <div class="text-eyebrow uppercase text-accent font-weight-500" style="margin-top: 0.5rem; letter-spacing: 0.18em;">Active — $900M AUM</div>
-              </div>
-            </div>
-            <div class="text-eyebrow uppercase text-muted" style="margin-top: 0.75rem; letter-spacing: 0.22em;">Venture Investing</div>
-          </article>
-        </li>
-      </ul>
-    </section>
-
-    <!-- IMPACT -->
-    <section id="impact" class="section">
-      <div class="ventures-header">
-        <div>
-          <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">By The Numbers</span></div>
-          <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem;">
-            <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Two decades,</span></div>
-            <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 90ms">measured.</span></div>
-          </h2>
-        </div>
-      </div>
-      
-      <dl class="stats-grid reveal-on-scroll">
-        <div class="stat-cell fade-slide-up" style="transition-delay: 0ms">
-          <dd class="stat-figure">4</dd>
-          <dt class="text-body uppercase text-muted" style="max-width: 20ch; letter-spacing: 0.14em;">Companies founded & exited</dt>
-        </div>
-        <div class="stat-cell fade-slide-up" style="transition-delay: 110ms">
-          <dd class="stat-figure">$3.2B</dd>
-          <dt class="text-body uppercase text-muted" style="max-width: 20ch; letter-spacing: 0.14em;">Enterprise value created</dt>
-        </div>
-        <div class="stat-cell fade-slide-up" style="transition-delay: 220ms">
-          <dd class="stat-figure">120M+</dd>
-          <dt class="text-body uppercase text-muted" style="max-width: 20ch; letter-spacing: 0.14em;">People served by his products</dt>
-        </div>
-        <div class="stat-cell fade-slide-up" style="transition-delay: 330ms">
-          <dd class="stat-figure">2,400</dd>
-          <dt class="text-body uppercase text-muted" style="max-width: 20ch; letter-spacing: 0.14em;">Jobs created across ventures</dt>
-        </div>
-      </dl>
-    </section>
-
-    <!-- VOICES -->
-    <section id="voices" class="section">
-      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Voices</span></div>
+    <!-- PROFILE -->
+    <section id="profile" class="section">
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Hồ sơ</span></div>
       <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem;">
-        <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">What they say.</span></div>
+        <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Thông tin</span></div>
+        <div class="reveal-line-wrap"><span class="reveal-line text-accent" style="transition-delay: 90ms">cá nhân.</span></div>
       </h2>
-      
-      <div class="grid-12" style="margin-top: 4rem;">
-        <ul class="col-5">
-          <li>
-            <button class="voice-btn is-active" data-voice="0">
-              <span class="voice-btn-index">01</span>
-              <div>
-                <div class="voice-btn-name">Elena Cardoso</div>
-                <div class="voice-btn-role">Managing Partner, Meridian Ventures</div>
+
+      <div class="grid-12 profile-grid">
+        <!-- 3D ID card -->
+        <div class="col-5 id-stage reveal-on-scroll fade-slide-up" id="id-stage">
+          <div class="id-card" id="id-card">
+            <div class="id-card-top">
+              <div class="logo-badge">HV</div>
+              <span class="eyebrow-text">Portfolio · 2026</span>
+            </div>
+            <div class="id-photo">
+              <img src="../images/Chân dung pixel nam đeo kính.png" alt="Chân dung pixel Lê Hoàng Vũ" loading="lazy" />
+            </div>
+            <div class="id-name">Lê Hoàng<br><span class="text-accent">Vũ</span></div>
+            <div class="id-meta">
+              <span class="eyebrow-text" style="line-height: 1.6;">Web Developer<br>UI/UX Designer</span>
+              <span class="id-barcode" aria-hidden="true"></span>
+            </div>
+            <div class="id-glare" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="col-7">
+          <!-- A. Personal info -->
+          <div class="block reveal-on-scroll fade-slide-up">
+            <h3 class="block-title"><span class="block-title-num">A</span>Thông tin</h3>
+            <dl class="info-list">
+              <div class="info-item"><dt class="eyebrow-text">Họ và tên</dt><dd class="info-value">Lê Hoàng Vũ</dd></div>
+              <div class="info-item"><dt class="eyebrow-text">Ngày sinh</dt><dd class="info-value">21.04.2005</dd></div>
+              <div class="info-item"><dt class="eyebrow-text">Địa chỉ</dt><dd class="info-value">195 Cầu Diễn, Hà Nội</dd></div>
+              <div class="info-item"><dt class="eyebrow-text">Số điện thoại</dt><dd><a class="info-value" href="tel:0359352668">0359 352 668</a></dd></div>
+              <div class="info-item"><dt class="eyebrow-text">Email</dt><dd><a class="info-value" href="mailto:vle751836@gmail.com" style="word-break: break-all;">vle751836@gmail.com</a></dd></div>
+              <div class="info-item"><dt class="eyebrow-text">Học vấn</dt><dd class="info-value">Sinh viên năm 4 — UET-VNU</dd></div>
+              <div class="info-item"><dt class="eyebrow-text">Chức vụ</dt><dd class="info-value">Phó Liên chi đoàn khoa</dd></div>
+              <div class="info-item">
+                <dt class="eyebrow-text">Ngoại ngữ</dt>
+                <dd class="info-value">Tiếng Anh B1
+                  <button class="info-link" type="button" data-lightbox-img="../images/certs/aptis-b1.jpg" data-lightbox-alt="Chứng chỉ Aptis ESOL B1 — British Council">· Xem chứng chỉ <span class="text-accent">↗</span></button>
+                </dd>
               </div>
-              <div class="voice-btn-rule"></div>
-            </button>
-          </li>
-          <li>
-            <button class="voice-btn" data-voice="1">
-              <span class="voice-btn-index">02</span>
+            </dl>
+          </div>
+
+          <!-- B. Experience -->
+          <div class="block">
+            <h3 class="block-title reveal-on-scroll fade-slide-up"><span class="block-title-num">B</span>Kinh nghiệm</h3>
+            <ul style="margin-top: 1.5rem;">
+              <li class="exp-row reveal-on-scroll fade-slide-up">
+                <div class="exp-head"><span class="exp-role">Thực tập Web Developer</span><span class="exp-dur">1 năm</span></div>
+                <div class="exp-bar" style="--p: 1"></div>
+              </li>
+              <li class="exp-row reveal-on-scroll fade-slide-up">
+                <div class="exp-head"><span class="exp-role">Thực tập UI/UX Designer</span><span class="exp-dur">3 tháng</span></div>
+                <div class="exp-bar" style="--p: 0.25"></div>
+              </li>
+              <li class="exp-row reveal-on-scroll fade-slide-up">
+                <div class="exp-head"><span class="exp-role">Editor</span><span class="exp-dur is-muted">Đang bắt đầu</span></div>
+                <div class="exp-bar is-dashed" style="--p: 0"></div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- C. Skills & tools -->
+          <div class="block reveal-on-scroll fade-slide-up">
+            <h3 class="block-title"><span class="block-title-num">C</span>Kỹ năng &amp; công cụ</h3>
+            <div class="skill-groups">
               <div>
-                <div class="voice-btn-name">David Okonkwo</div>
-                <div class="voice-btn-role">Founder & CEO, Cadence Health</div>
+                <div class="eyebrow-text">Kỹ năng</div>
+                <ul class="chip-list"><li class="chip">Thiết kế</li><li class="chip">Lập trình web</li><li class="chip">Edit video</li></ul>
               </div>
-              <div class="voice-btn-rule"></div>
-            </button>
-          </li>
-          <li>
-            <button class="voice-btn" data-voice="2">
-              <span class="voice-btn-index">03</span>
               <div>
-                <div class="voice-btn-name">Priya Nandakumar</div>
-                <div class="voice-btn-role">CEO, Northwind Energy</div>
+                <div class="eyebrow-text">Công cụ thiết kế</div>
+                <ul class="chip-list"><li class="chip">Figma</li><li class="chip">Wix</li><li class="chip">CapCut</li></ul>
               </div>
-              <div class="voice-btn-rule"></div>
-            </button>
-          </li>
-        </ul>
-        
-        <div class="col-7 voices-panel">
-          <figure class="liquid-image-wrapper voices-portrait reveal-on-scroll fade-scale-in" data-filter-id="liq-voices">
-            <img id="voices-portrait-img" class="liquid-media" src="" style="filter:url(#liq-voices)" alt="" />
-            <div class="liquid-overlay grayscale-veil"></div>
-            <div class="liquid-overlay accent-glow"></div>
-            <div class="liquid-overlay vignette"></div>
-          </figure>
-          <blockquote>
-            <p id="voices-quote-text" class="text-h3 font-sans" style="max-width: 30ch; font-weight: 500; line-height: 1.3; letter-spacing: -0.01em; color: var(--foreground);"></p>
-            <footer id="voices-quote-footer" class="text-eyebrow uppercase text-muted" style="margin-top: 2rem; letter-spacing: 0.18em;"></footer>
-          </blockquote>
+              <div>
+                <div class="eyebrow-text">Ngôn ngữ lập trình</div>
+                <ul class="chip-list"><li class="chip">JavaScript</li><li class="chip">Python</li></ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements" class="section">
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Thành tích &amp; Minh chứng</span></div>
+      <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem;">
+        <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Minh chứng</span></div>
+        <div class="reveal-line-wrap"><span class="reveal-line text-accent" style="transition-delay: 90ms">nói thay lời.</span></div>
+      </h2>
+      <p class="text-lead text-muted fade-slide-up reveal-on-scroll" style="margin-top: 2rem; max-width: 46ch;">
+        Chọn một hạng mục để xoay tới minh chứng tương ứng, rồi bấm “Xem minh chứng” để mở.
+      </p>
+
+      <div class="grid-12 proof-grid">
+        <ul class="col-5 proof-tabs reveal-on-scroll fade-slide-up" role="tablist" aria-label="Hạng mục minh chứng">
+          <li><button class="proof-tab is-active" role="tab" aria-selected="true" aria-controls="proof-face-0"><span class="proof-tab-index">01</span><div><div class="proof-tab-name">Github</div><div class="proof-tab-sub">Mã nguồn dự án</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-1"><span class="proof-tab-index">02</span><div><div class="proof-tab-name">Paper AI</div><div class="proof-tab-sub">Nghiên cứu khoa học</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-2"><span class="proof-tab-index">03</span><div><div class="proof-tab-name">Thiết kế Website</div><div class="proof-tab-sub">Sản phẩm web</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-3"><span class="proof-tab-index">04</span><div><div class="proof-tab-name">Thiết kế Figma</div><div class="proof-tab-sub">UI/UX &amp; prototype</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-4"><span class="proof-tab-index">05</span><div><div class="proof-tab-name">Edit Video</div><div class="proof-tab-sub">Dựng &amp; hậu kỳ</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-5"><span class="proof-tab-index">06</span><div><div class="proof-tab-name">Thiết kế Poster</div><div class="proof-tab-sub">Ấn phẩm đồ hoạ</div></div><span class="proof-tab-rule"></span></button></li>
+        </ul>
+
+        <div class="col-7 reveal-on-scroll fade-scale-in">
+          <div class="proof-stage" id="proof-stage">
+            <div class="proof-ring" id="proof-ring">
+              <article class="proof-face is-active" id="proof-face-0" role="tabpanel" style="--i: 0">
+                <div class="proof-face-top"><span class="proof-num">01</span><span class="eyebrow-text">Mã nguồn</span></div>
+                <div class="proof-glyph" aria-hidden="true">{ }</div>
+                <h3 class="proof-title">Github</h3>
+                <p class="text-body text-muted">Kho mã nguồn các dự án cá nhân, bài tập lớn và sản phẩm trong quá trình thực tập.</p>
+                <a class="proof-cta" href="https://github.com/hvu2104" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
+              </article>
+              <article class="proof-face" id="proof-face-1" role="tabpanel" style="--i: 1">
+                <div class="proof-face-top"><span class="proof-num">02</span><span class="eyebrow-text">Nghiên cứu</span></div>
+                <div class="proof-glyph" aria-hidden="true">AI</div>
+                <h3 class="proof-title">Paper AI</h3>
+                <p class="text-body text-muted">Bài báo và công trình nghiên cứu trong lĩnh vực Trí tuệ nhân tạo.</p>
+                <a class="proof-cta" href="https://drive.google.com/drive/folders/1uUAfWQvzZz_U4JRmmeS3ohRZDb_9_JTN?hl=vi" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
+              </article>
+              <article class="proof-face" id="proof-face-2" role="tabpanel" style="--i: 2">
+                <div class="proof-face-top"><span class="proof-num">03</span><span class="eyebrow-text">Web</span></div>
+                <div class="proof-glyph" aria-hidden="true">www</div>
+                <h3 class="proof-title">Website</h3>
+                <p class="text-body text-muted">Các website đã thiết kế và lập trình, từ giao diện đến triển khai thực tế.</p>
+                <div class="proof-ctas"><a class="proof-cta" href="https://nguyenan6002.wixstudio.com/my-site-9" target="_blank" rel="noreferrer noopener">Website 01 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://ngngocanh2806.wixstudio.com/my-site-7" target="_blank" rel="noreferrer noopener">Website 02 <span class="text-accent">↗</span></a></div>
+              </article>
+              <article class="proof-face" id="proof-face-3" role="tabpanel" style="--i: 3">
+                <div class="proof-face-top"><span class="proof-num">04</span><span class="eyebrow-text">UI/UX</span></div>
+                <div class="proof-glyph" aria-hidden="true">UI</div>
+                <h3 class="proof-title">Figma</h3>
+                <p class="text-body text-muted">Wireframe, design system và prototype tương tác trên Figma.</p>
+                <a class="proof-cta" href="https://www.figma.com/design/yPXs1Yepu4mPN5xHEi4PWl/HVSinh-Remake?t=tDBVrInwYkALdo4g-1" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
+              </article>
+              <article class="proof-face" id="proof-face-4" role="tabpanel" style="--i: 4">
+                <div class="proof-face-top"><span class="proof-num">05</span><span class="eyebrow-text">Video</span></div>
+                <div class="proof-media">
+                  <video src="../videos/banh-bac-dau-preview.mp4" poster="../videos/banh-bac-dau-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+                </div>
+                <h3 class="proof-title">Edit Video</h3>
+                <p class="text-body text-muted">Video intro cá nhân và video “Bánh bạc đẩu”.</p>
+                <div class="proof-ctas"><a class="proof-cta" href="https://www.tiktok.com/@leeminwho2104/video/7695678434072153364" target="_blank" rel="noreferrer noopener">TikTok <span class="text-accent">↗</span></a><button class="proof-cta" type="button" data-lightbox-video="../videos/le-hoang-vu-intro.mp4">Intro <span class="text-accent">▶</span></button><button class="proof-cta" type="button" data-lightbox-video="../videos/banh-bac-dau.mp4">Bánh bạc đẩu <span class="text-accent">▶</span></button></div>
+              </article>
+              <article class="proof-face" id="proof-face-5" role="tabpanel" style="--i: 5">
+                <div class="proof-face-top"><span class="proof-num">06</span><span class="eyebrow-text">Đồ hoạ</span></div>
+                <button class="proof-media is-poster" type="button" data-lightbox-img="../images/posters/logic-sang-tao.jpg" data-lightbox-alt="Poster “Logic × Sáng tạo”" aria-label="Phóng to poster">
+                  <img src="../images/posters/logic-sang-tao-thumb.jpg" alt="" loading="lazy" />
+                </button>
+                <h3 class="proof-title">Poster</h3>
+                <p class="text-body text-muted">Poster “Logic × Sáng tạo”.</p>
+                <button class="proof-cta" type="button" data-lightbox-img="../images/posters/logic-sang-tao.jpg" data-lightbox-alt="Poster “Logic × Sáng tạo”">Xem poster <span class="text-accent">↗</span></button>
+              </article>
+            </div>
+          </div>
+          <div class="proof-controls">
+            <button class="proof-arrow" id="proof-prev" aria-label="Hạng mục trước">←</button>
+            <span class="proof-counter" id="proof-counter">01 / 06</span>
+            <button class="proof-arrow" id="proof-next" aria-label="Hạng mục tiếp theo">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer id="contact" class="footer-section">
-    <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Let's Build</span></div>
-    <h2 class="contact-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem; max-width: 18ch;">
-      <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Have something</span></div>
-      <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 90ms">the world says</span></div>
-      <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 180ms">can't be done?</span></div>
-    </h2>
-    <p class="text-lead text-muted fade-slide-up reveal-on-scroll" style="margin-top: 2rem; max-width: 44ch;">
-      That's usually where I start. I read every message I'm sent.
-    </p>
-    
-    <a href="mailto:hello@hoangvu.com" class="email-link">
-      hello@hoangvu.com <span class="text-accent">↗</span>
-    </a>
-    
-    <div class="footer-bar">
-      <div class="col-6">
-        <p class="text-h2 uppercase font-display" style="letter-spacing: -0.01em;">Hoang Vu</p>
-        <p class="text-eyebrow uppercase text-muted" style="margin-top: 1rem; letter-spacing: 0.22em;">Designed & built with conviction.</p>
-      </div>
-      <div class="col-3">
-        <nav aria-label="Social">
-          <ul class="social-links" style="display: flex; flex-direction: column; gap: 1rem;">
-             <li><a href="https://www.linkedin.com" target="_blank" rel="noreferrer noopener">LinkedIn</a></li>
-             <li><a href="https://x.com" target="_blank" rel="noreferrer noopener">X / Twitter</a></li>
-             <li><a href="https://substack.com" target="_blank" rel="noreferrer noopener">Substack</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-3" style="text-align: right;">
-        <p class="text-eyebrow uppercase text-muted" style="letter-spacing: 0.18em;">© 2026 Hoang Vu. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+  <!-- LIGHTBOX (certificate image / full video) -->
+  <dialog id="lightbox" class="lightbox" aria-label="Xem minh chứng">
+    <button class="lightbox-close" type="button" aria-label="Đóng">✕</button>
+    <div class="lightbox-body" id="lightbox-body"></div>
+  </dialog>
 
   <script type="module">
     import Lenis from "lenis";
@@ -743,60 +691,91 @@
     }, { threshold: 0 });
     document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
 
-    // --- 5. VOICES INTERACTION ---
-    const voicesData = [
-      {
-        quote: "Marcus saw the market three years before the rest of us. Betting alongside him changed the trajectory of my entire career.",
-        name: "Elena Cardoso", role: "Managing Partner, Meridian Ventures",
-        img: "https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/voices/voice-01.webp"
-      },
-      {
-        quote: "He doesn't just write checks — he gets in the trenches at 6am and refuses to leave until the impossible part is solved.",
-        name: "David Okonkwo", role: "Founder & CEO, Cadence Health",
-        img: "https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/voices/voice-02.webp"
-      },
-      {
-        quote: "The most demanding mentor I've ever had, and the only reason our company survived its first winter. Relentless, generous, right.",
-        name: "Priya Nandakumar", role: "CEO, Northwind Energy",
-        img: "https://api.getlayers.ai/storage/v1/object/public/public/assets/marcus-vane-6799bd1fb6/voices/voice-03.webp"
-      }
-    ];
-
-    const quoteContainer = document.getElementById('voices-quote-text');
-    const quoteFooter = document.getElementById('voices-quote-footer');
-    const voiceImage = document.getElementById('voices-portrait-img');
-    const voiceBtns = document.querySelectorAll('.voice-btn');
-
-    function setVoice(index) {
-      voiceBtns.forEach((btn, i) => btn.classList.toggle('is-active', i === index));
-      const data = voicesData[index];
-      voiceImage.src = data.img;
-      quoteFooter.textContent = `${data.name} — ${data.role}`;
-      
-      quoteContainer.innerHTML = '';
-      const words = `“${data.quote}”`.split(' ');
-      words.forEach((word, i) => {
-        const wrap = document.createElement('span');
-        wrap.className = 'reveal-word-wrap';
-        const inner = document.createElement('span');
-        inner.className = 'reveal-word-inner';
-        if (!reducedMotion) inner.style.transitionDelay = `${i * 22}ms`;
-        inner.textContent = word + (i < words.length - 1 ? ' ' : '');
-        wrap.appendChild(inner);
-        quoteContainer.appendChild(wrap);
+    // --- 5. 3D TILT (pointer over host → --rx/--ry/--gx/--gy on target) ---
+    function tilt(host, target, max) {
+      if (reducedMotion || !matchMedia('(hover: hover)').matches) return;
+      host.addEventListener('pointermove', (e) => {
+        const r = host.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        target.style.setProperty('--ry', `${(x - 0.5) * max}deg`);
+        target.style.setProperty('--rx', `${(0.5 - y) * max}deg`);
+        target.style.setProperty('--gx', `${x * 100}%`);
+        target.style.setProperty('--gy', `${y * 100}%`);
       });
-      
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          quoteContainer.querySelectorAll('.reveal-word-inner').forEach(el => el.classList.add('is-revealed'));
-        });
+      host.addEventListener('pointerleave', () => {
+        target.style.setProperty('--rx', '0deg');
+        target.style.setProperty('--ry', '0deg');
       });
     }
-    
-    voiceBtns.forEach((btn, idx) => {
-      btn.addEventListener('click', () => setVoice(idx));
+    tilt(document.getElementById('id-stage'), document.getElementById('id-card'), 24);
+    tilt(document.getElementById('proof-stage'), document.getElementById('proof-ring'), 14);
+
+    // --- 6. ACHIEVEMENTS CAROUSEL ---
+    const proofTabs = [...document.querySelectorAll('.proof-tab')];
+    const proofFaces = [...document.querySelectorAll('.proof-face')];
+    const proofRing = document.getElementById('proof-ring');
+    const proofCounter = document.getElementById('proof-counter');
+    const pad = (n) => String(n).padStart(2, '0');
+    let proofIndex = 0, proofAngle = 0;
+
+    function selectProof(i, focusTab = false) {
+      const n = proofFaces.length;
+      i = (i + n) % n;
+      let delta = (i - proofIndex + n) % n;
+      if (delta > n / 2) delta -= n; // rotate the short way round
+      proofAngle -= delta * 360 / n;
+      proofIndex = i;
+      proofRing.style.setProperty('--angle', `${proofAngle}deg`);
+      proofTabs.forEach((t, k) => {
+        t.classList.toggle('is-active', k === i);
+        t.setAttribute('aria-selected', k === i);
+        t.tabIndex = k === i ? 0 : -1;
+      });
+      proofFaces.forEach((f, k) => {
+        f.classList.toggle('is-active', k === i);
+        f.querySelectorAll('.proof-cta, button.proof-media').forEach(c => { c.tabIndex = k === i ? 0 : -1; });
+        const v = f.querySelector('video');
+        if (v) k === i && !reducedMotion ? v.play().catch(() => {}) : v.pause();
+      });
+      proofCounter.textContent = `${pad(i + 1)} / ${pad(n)}`;
+      if (focusTab) proofTabs[i].focus();
+    }
+
+    proofTabs.forEach((t, k) => {
+      t.addEventListener('click', () => selectProof(k));
+      t.addEventListener('keydown', (e) => {
+        const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (step) { e.preventDefault(); selectProof(proofIndex + step, true); }
+      });
     });
-    setVoice(0);
+    proofFaces.forEach((f, k) => f.addEventListener('click', () => { if (k !== proofIndex) selectProof(k); }));
+    document.getElementById('proof-prev').addEventListener('click', () => selectProof(proofIndex - 1));
+    document.getElementById('proof-next').addEventListener('click', () => selectProof(proofIndex + 1));
+    selectProof(0);
+
+    // --- 7. LIGHTBOX ---
+    const lightbox = document.getElementById('lightbox');
+    const lightboxBody = document.getElementById('lightbox-body');
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-lightbox-img], [data-lightbox-video]');
+      if (!trigger) return;
+      lightboxBody.replaceChildren();
+      if (trigger.dataset.lightboxImg) {
+        const img = document.createElement('img');
+        img.src = trigger.dataset.lightboxImg;
+        img.alt = trigger.dataset.lightboxAlt || '';
+        lightboxBody.append(img);
+      } else {
+        const video = document.createElement('video');
+        Object.assign(video, { src: trigger.dataset.lightboxVideo, controls: true, autoplay: true, playsInline: true });
+        lightboxBody.append(video);
+      }
+      lenis.stop();
+      lightbox.showModal();
+    });
+    lightbox.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close(); }); // backdrop
+    lightbox.addEventListener('close', () => { lightboxBody.replaceChildren(); lenis.start(); });
 
 
   </script>
