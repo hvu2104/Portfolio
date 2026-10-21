@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hoàng Vũ — Lập trình viên Web, Nhà thiết kế UI/UX</title>
+  <title>Hoàng Vũ — UI/UX Designer &amp; Editor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
@@ -77,12 +77,12 @@
     .text-eyebrow { font-size: 0.8125rem; line-height: 1.2; }
 
     /* RESPONSIVE SCALES (Mapped based on prompt breakpoints) */
-    .hero-name-font { font-size: 13rem; line-height: 0.86; }
+    .hero-name-font { font-size: 8.5rem; line-height: 0.86; } /* mobile: "HOANG" must fit 375px */
     .hero-role-font { font-size: 1.75rem; line-height: 1.15; }
     .section-heading-font { font-size: 3.25rem; line-height: 1; }
     
     @media (min-width: 640px) {
-      .hero-name-font { font-size: 28rem; line-height: 0.78; }
+      .hero-name-font { font-size: min(28rem, 36vh); line-height: 0.78; } /* two rows must stay below the roles text on short screens */
       .hero-role-font { font-size: 3.25rem; line-height: 1; }
       .section-heading-font { font-size: 5rem; line-height: 0.95; }
     }
@@ -169,12 +169,13 @@
 
     /* HERO */
     .hero-section { position: relative; display: flex; flex-direction: column; min-height: 100svh; overflow: hidden; }
-    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1600ms ease-out 2300ms; }
+    .hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0; transition: opacity 1600ms ease-out; }
     .hero-section.is-revealed .hero-canvas { opacity: 1; }
     .hero-top-row { display: flex; flex-direction: column; gap: 2rem; padding: 7rem var(--gutter) 0; z-index: 30; position: relative; }
     @media (min-width: 640px) { .hero-top-row { flex-direction: row; align-items: flex-start; justify-content: space-between; padding-top: 8rem; } .hero-desc { text-align: right; } }
     .hero-desc { max-width: 26rem; }
-    .hero-portrait-col { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 86vh; width: 80vw; z-index: 20; pointer-events: none; }
+    .hero-section .hero-portrait-col { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); height: 86vh; width: 80vw; z-index: 20; pointer-events: none; }
+    @media (max-width: 639px) { .hero-section .hero-portrait-col { height: 60vh; } }
     @media (min-width: 640px) { .hero-portrait-col { width: 48vw; } }
     @media (min-width: 1024px) { .hero-portrait-col { width: 36vw; } }
     .hero-gradient { position: absolute; inset-inline: 0; bottom: 0; z-index: 20; height: 26vh; background: linear-gradient(to bottom, transparent, #08080a); pointer-events: none; }
@@ -189,6 +190,12 @@
     .liquid-image-wrapper:not(.bare) { background: radial-gradient(130% 130% at 30% 15%, var(--surface-2), var(--background)); }
     .liquid-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; }
     .liquid-overlay { position: absolute; inset: 0; pointer-events: none; }
+
+    /* INTRO VIDEO */
+    .intro-section { padding: 4rem var(--gutter) 6rem; }
+    .intro-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+    .intro-frame { position: relative; aspect-ratio: 16/9; overflow: hidden; border-radius: 1rem; border: 1px solid var(--line-strong); background: #000; }
+    .intro-frame video { width: 100%; height: 100%; object-fit: cover; }
 
     /* MARQUEE */
     .marquee-section { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 2rem 0; }
@@ -221,7 +228,7 @@
     .id-photo { --z: 55px; position: relative; flex: 1; min-height: 0; margin: 1.25rem 0; border-radius: 0.5rem; overflow: hidden; background: #1a3570; }
     .id-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; image-rendering: pixelated; filter: grayscale(1) contrast(1.05); transition: filter 500ms ease-out; }
     .id-card:hover .id-photo img { filter: none; }
-    .id-name { --z: 80px; font-family: var(--font-display); font-size: 3.25rem; line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
+    .id-name { --z: 80px; font-family: var(--font-display); font-size: 2.75rem; white-space: nowrap; line-height: 0.95; text-transform: uppercase; letter-spacing: -0.01em; }
     .id-meta { --z: 40px; margin-top: 1rem; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
     .id-barcode { height: 1.75rem; width: 7rem; flex-shrink: 0; opacity: 0.55; background: repeating-linear-gradient(90deg, var(--foreground) 0 2px, transparent 2px 4px, var(--foreground) 4px 5px, transparent 5px 8px, var(--foreground) 8px 11px, transparent 11px 13px); }
     .id-glare { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; transform: translateZ(90px); background: radial-gradient(circle at var(--gx, 30%) var(--gy, 0%), rgba(255,255,255,0.14), transparent 50%); }
@@ -239,9 +246,7 @@
     .exp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
     .exp-role { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; }
     .exp-dur { font-family: var(--font-display); font-size: 1.75rem; line-height: 1; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
-    .exp-dur.is-muted { color: var(--muted); }
     .exp-bar { position: relative; height: 2px; margin-top: 1.25rem; overflow: hidden; background: var(--line); }
-    .exp-bar.is-dashed { background: repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px); }
     .exp-bar::after { content: ""; position: absolute; inset: 0; background: var(--accent); transform-origin: left; transform: scaleX(0); transition: transform 1400ms cubic-bezier(0.16,1,0.3,1) 250ms; }
     .exp-row.is-revealed .exp-bar::after { transform: scaleX(var(--p)); }
 
@@ -315,9 +320,35 @@
     .lightbox-body img, .lightbox-body video { display: block; max-width: 100%; max-height: 88vh; margin: auto; border-radius: 0.75rem; }
     .lightbox-close { position: absolute; top: -1rem; right: -1rem; z-index: 1; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border-radius: 9999px; background: var(--accent); color: var(--background); font-size: 1.125rem; }
     @media (max-width: 639px) { .lightbox-close { top: 0.5rem; right: 0.5rem; } }
+    .lightbox-body video { max-height: 80vh; } /* leaves room for the back button */
+    .lightbox-embed { display: block; width: min(325px, 86vw); height: min(740px, 82vh); border: 0; border-radius: 0.75rem; background: #000; }
+    .lightbox-back { display: block; padding: 0.75rem 1rem; font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); transition: color 0.3s; }
+    .lightbox-back:hover { color: var(--accent); }
+    .video-list { width: min(36rem, 88vw); padding: 2rem; }
+    .video-list .eyebrow, .lightbox-back { padding-right: 3.5rem; } /* room for the close button */
+    .video-list ul { margin-top: 1.5rem; border-top: 1px solid var(--line); }
+    .video-list button { display: flex; align-items: baseline; gap: 1rem; width: 100%; padding: 1.25rem 0; border-bottom: 1px solid var(--line); text-align: left; }
+    .vl-num { font-size: var(--text-eyebrow); letter-spacing: 0.18em; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .vl-title { flex: 1; font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; transition: color 0.3s; }
+    .vl-tag { font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); }
+    .video-list button:hover .vl-title { color: var(--accent); }
     .proof-controls { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
-    .proof-arrow { display: grid; place-items: center; width: 3rem; height: 3rem; border: 1px solid var(--line-strong); border-radius: 9999px; font-size: 1.25rem; transition: background 0.3s, color 0.3s, border-color 0.3s; }
-    .proof-arrow:hover { background: var(--accent); border-color: var(--accent); color: var(--background); }
+    .proof-hint { font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
+    .proof-stage { touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+    .proof-ring.is-dragging { transition: none; }
+    .proof-stage:has(.is-dragging) { cursor: grabbing; }
+
+    /* mobile: tabs become a swipeable strip of pills */
+    @media (max-width: 1023px) {
+      .proof-tabs { display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); }
+      .proof-tabs::-webkit-scrollbar { display: none; }
+      .proof-tabs li { flex-shrink: 0; }
+      .proof-tab, .proof-tabs li:last-child .proof-tab { align-items: center; gap: 0.5rem; padding: 0.625rem 1rem; border: 1px solid var(--line-strong); border-radius: 9999px; }
+      .proof-tab.is-active { border-color: var(--accent); }
+      .proof-tab-name { font-size: 1rem; white-space: nowrap; }
+      .proof-tab-sub, .proof-tab-rule { display: none; }
+      .proof-grid { gap: 2rem; }
+    }
     .proof-counter { font-size: var(--text-eyebrow); font-variant-numeric: tabular-nums; letter-spacing: 0.22em; color: var(--muted); }
 
     /* REDUCED MOTION */
@@ -371,11 +402,11 @@
       <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-top-row">
         <h2 class="hero-roles text-foreground uppercase font-display hero-role-font">
-          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 2700ms">Lập trình viên Web</span></div>
-          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 2780ms">Thiết kế UI/UX</span></div>
+          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 300ms">UI/UX Designer</span></div>
+          <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 380ms">&amp; Editor</span></div>
         </h2>
-        <p class="hero-desc text-body text-muted fade-slide-up" style="transition-delay: 2900ms">
-          Trang web này là một portfolio trực quan, giúp bạn dễ dàng đánh giá tư duy thiết kế, kỹ năng lập trình và quy trình phát triển sản phẩm trọn vẹn của tôi.
+        <p class="hero-desc text-body text-muted fade-slide-up" style="transition-delay: 500ms">
+          Portfolio của tôi: thiết kế giao diện, dựng video và những sản phẩm đã làm — mỗi thứ đều kèm minh chứng để bạn tự xem.
         </p>
       </div>
       
@@ -386,22 +417,33 @@
       
       <h1 class="hero-name-container font-display uppercase hero-name-font text-accent">
         <div class="hero-name-row">
-          <span class="reveal-letter" style="transition-delay: 2500ms">H</span>
-          <span class="reveal-letter" style="transition-delay: 2552ms">O</span>
-          <span class="reveal-letter" style="transition-delay: 2604ms">A</span>
-          <span class="reveal-letter" style="transition-delay: 2656ms">N</span>
-          <span class="reveal-letter" style="transition-delay: 2708ms">G</span>
+          <span class="reveal-letter" style="transition-delay: 100ms">H</span>
+          <span class="reveal-letter" style="transition-delay: 152ms">O</span>
+          <span class="reveal-letter" style="transition-delay: 204ms">A</span>
+          <span class="reveal-letter" style="transition-delay: 256ms">N</span>
+          <span class="reveal-letter" style="transition-delay: 308ms">G</span>
         </div>
         <div class="hero-name-row">
-          <span class="reveal-letter" style="transition-delay: 2740ms">V</span>
-          <span class="reveal-letter" style="transition-delay: 2792ms">U</span>
+          <span class="reveal-letter" style="transition-delay: 340ms">V</span>
+          <span class="reveal-letter" style="transition-delay: 392ms">U</span>
         </div>
       </h1>
       
-      <div class="scroll-cue fade-slide-up" style="transition-delay: 3400ms">
+      <div class="scroll-cue fade-slide-up" style="transition-delay: 1000ms">
         <div class="scroll-rule"></div>
         Cuộn để khám phá
       </div>
+    </section>
+
+    <!-- INTRO VIDEO -->
+    <section id="intro" class="intro-section" aria-label="Video giới thiệu">
+      <div class="intro-head">
+        <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Intro</span></div>
+        <span class="eyebrow-text">Lê Hoàng Vũ · 00:20</span>
+      </div>
+      <figure class="intro-frame reveal-on-scroll fade-scale-in">
+        <video id="intro-video" src="../videos/le-hoang-vu-intro.mp4" poster="../videos/le-hoang-vu-intro-poster.jpg" muted loop playsinline preload="metadata"></video>
+      </figure>
     </section>
 
     <!-- MARQUEE -->
@@ -451,9 +493,9 @@
             <div class="id-photo">
               <img src="../images/Chân dung pixel nam đeo kính.png" alt="Chân dung pixel Lê Hoàng Vũ" loading="lazy" />
             </div>
-            <div class="id-name">Lê Hoàng<br><span class="text-accent">Vũ</span></div>
+            <div class="id-name">Lê Hoàng <span class="text-accent">Vũ</span></div>
             <div class="id-meta">
-              <span class="eyebrow-text" style="line-height: 1.6;">Web Developer<br>UI/UX Designer</span>
+              <span class="eyebrow-text" style="line-height: 1.6;">UI/UX Designer<br>Editor</span>
               <span class="id-barcode" aria-hidden="true"></span>
             </div>
             <div class="id-glare" aria-hidden="true"></div>
@@ -494,8 +536,8 @@
                 <div class="exp-bar" style="--p: 0.25"></div>
               </li>
               <li class="exp-row reveal-on-scroll fade-slide-up">
-                <div class="exp-head"><span class="exp-role">Editor</span><span class="exp-dur is-muted">Đang bắt đầu</span></div>
-                <div class="exp-bar is-dashed" style="--p: 0"></div>
+                <div class="exp-head"><span class="exp-role">Editor</span><span class="exp-dur">1 tháng</span></div>
+                <div class="exp-bar" style="--p: 0.0833"></div>
               </li>
             </ul>
           </div>
@@ -527,10 +569,10 @@
       <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Thành tích &amp; Minh chứng</span></div>
       <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem;">
         <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Minh chứng</span></div>
-        <div class="reveal-line-wrap"><span class="reveal-line text-accent" style="transition-delay: 90ms">nói thay lời.</span></div>
+        <div class="reveal-line-wrap"><span class="reveal-line text-accent" style="transition-delay: 90ms">thay lời nói.</span></div>
       </h2>
       <p class="text-lead text-muted fade-slide-up reveal-on-scroll" style="margin-top: 2rem; max-width: 46ch;">
-        Chọn một hạng mục để xoay tới minh chứng tương ứng, rồi bấm “Xem minh chứng” để mở.
+        Chọn một hạng mục hoặc kéo vòng thẻ để xoay, rồi bấm “Xem minh chứng” để mở.
       </p>
 
       <div class="grid-12 proof-grid">
@@ -580,8 +622,8 @@
                   <video src="../videos/banh-bac-dau-preview.mp4" poster="../videos/banh-bac-dau-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
                 </div>
                 <h3 class="proof-title">Edit Video</h3>
-                <p class="text-body text-muted">Video intro cá nhân và video “Bánh bạc đẩu”.</p>
-                <div class="proof-ctas"><a class="proof-cta" href="https://www.tiktok.com/@leeminwho2104/video/7695678434072153364" target="_blank" rel="noreferrer noopener">TikTok <span class="text-accent">↗</span></a><button class="proof-cta" type="button" data-lightbox-video="../videos/le-hoang-vu-intro.mp4">Intro <span class="text-accent">▶</span></button><button class="proof-cta" type="button" data-lightbox-video="../videos/banh-bac-dau.mp4">Bánh bạc đẩu <span class="text-accent">▶</span></button></div>
+                <p class="text-body text-muted">4 video: TikTok, “Những đứa trẻ”, FPT Shop × TECNO Esports và “Bánh bạc đẩu”.</p>
+                <div class="proof-ctas"><button class="proof-cta" type="button" data-lightbox-embed="https://www.tiktok.com/embed/v2/7698840415432232213"><span class="text-accent">★</span> Tốt nhất</button><button class="proof-cta" type="button" data-lightbox-template="video-list">Tất cả video <span class="text-accent">(4)</span></button></div>
               </article>
               <article class="proof-face" id="proof-face-5" role="tabpanel" style="--i: 5">
                 <div class="proof-face-top"><span class="proof-num">06</span><span class="eyebrow-text">Đồ hoạ</span></div>
@@ -595,9 +637,8 @@
             </div>
           </div>
           <div class="proof-controls">
-            <button class="proof-arrow" id="proof-prev" aria-label="Hạng mục trước">←</button>
+            <span class="proof-hint" aria-hidden="true">← Kéo để xoay →</span>
             <span class="proof-counter" id="proof-counter">01 / 06</span>
-            <button class="proof-arrow" id="proof-next" aria-label="Hạng mục tiếp theo">→</button>
           </div>
         </div>
       </div>
@@ -609,6 +650,19 @@
     <button class="lightbox-close" type="button" aria-label="Đóng">✕</button>
     <div class="lightbox-body" id="lightbox-body"></div>
   </dialog>
+
+  <!-- Edit Video list, opened inside the lightbox -->
+  <template id="video-list">
+    <div class="video-list">
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Edit Video · 4 sản phẩm</span></div>
+      <ul>
+        <li><button type="button" data-lightbox-embed="https://www.tiktok.com/embed/v2/7698840415432232213"><span class="vl-num">01</span><span class="vl-title">TikTok — Sản phẩm tốt nhất</span><span class="vl-tag">★ Best</span></button></li>
+        <li><button type="button" data-lightbox-video="../videos/nhung-dua-tre.mp4"><span class="vl-num">02</span><span class="vl-title">Những đứa trẻ</span><span class="vl-tag">9:16</span></button></li>
+        <li><button type="button" data-lightbox-video="../videos/fpt-tecno-esports.mp4"><span class="vl-num">03</span><span class="vl-title">FPT Shop × TECNO Esports</span><span class="vl-tag">9:16</span></button></li>
+        <li><button type="button" data-lightbox-video="../videos/banh-bac-dau.mp4"><span class="vl-num">04</span><span class="vl-title">Bánh bạc đẩu</span><span class="vl-tag">16:9</span></button></li>
+      </ul>
+    </div>
+  </template>
 
   <script type="module">
     import Lenis from "lenis";
@@ -663,10 +717,8 @@
         preloader.classList.add('labels-fading');
         setTimeout(() => {
           preloader.classList.add('is-wiping');
-          setTimeout(() => {
-            lenis.start();
-            document.getElementById('top').classList.add('is-revealed');
-          }, 650);
+          document.getElementById('top').classList.add('is-revealed'); // reveal under the lifting curtain
+          setTimeout(() => lenis.start(), 650);
         }, 500); // 300ms fade + 200ms delay
       }
     }
@@ -690,6 +742,11 @@
       });
     }, { threshold: 0 });
     document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    // --- 4b. INTRO VIDEO: play only while on screen (silent clip, so autoplay is allowed) ---
+    const introVideo = document.getElementById('intro-video');
+    if (reducedMotion) introVideo.controls = true;
+    else new IntersectionObserver(([e]) => { e.isIntersecting ? introVideo.play().catch(() => {}) : introVideo.pause(); }, { threshold: 0.25 }).observe(introVideo);
 
     // --- 5. 3D TILT (pointer over host → --rx/--ry/--gx/--gy on target) ---
     function tilt(host, target, max) {
@@ -715,6 +772,8 @@
     const proofFaces = [...document.querySelectorAll('.proof-face')];
     const proofRing = document.getElementById('proof-ring');
     const proofCounter = document.getElementById('proof-counter');
+    const proofTabList = document.querySelector('.proof-tabs');
+    const proofStage = document.getElementById('proof-stage');
     const pad = (n) => String(n).padStart(2, '0');
     let proofIndex = 0, proofAngle = 0;
 
@@ -738,6 +797,8 @@
         if (v) k === i && !reducedMotion ? v.play().catch(() => {}) : v.pause();
       });
       proofCounter.textContent = `${pad(i + 1)} / ${pad(n)}`;
+      // keep the active pill centred when tabs become a horizontal strip (mobile); no-op otherwise
+      proofTabList.scrollTo({ left: proofTabs[i].offsetLeft - (proofTabList.clientWidth - proofTabs[i].offsetWidth) / 2, behavior: reducedMotion ? 'auto' : 'smooth' });
       if (focusTab) proofTabs[i].focus();
     }
 
@@ -749,29 +810,78 @@
       });
     });
     proofFaces.forEach((f, k) => f.addEventListener('click', () => { if (k !== proofIndex) selectProof(k); }));
-    document.getElementById('proof-prev').addEventListener('click', () => selectProof(proofIndex - 1));
-    document.getElementById('proof-next').addEventListener('click', () => selectProof(proofIndex + 1));
     selectProof(0);
+
+    // Drag / swipe to spin the ring; release snaps to the nearest face
+    const DRAG_DEG_PER_PX = 0.35, STEP_DEG = 360 / proofFaces.length;
+    let drag = null, suppressClick = false;
+    proofStage.addEventListener('dragstart', (e) => e.preventDefault());
+    proofStage.addEventListener('pointerdown', (e) => {
+      if (e.button === 0) drag = { id: e.pointerId, x: e.clientX, y: e.clientY, active: false };
+    });
+    proofStage.addEventListener('pointermove', (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const dx = e.clientX - drag.x;
+      if (!drag.active) {
+        if (Math.abs(dx) < 8) return;
+        if (Math.abs(e.clientY - drag.y) > Math.abs(dx)) { drag = null; return; } // vertical: let the page scroll
+        drag.active = true;
+        proofStage.setPointerCapture(e.pointerId);
+        proofRing.classList.add('is-dragging');
+      }
+      proofRing.style.setProperty('--angle', `${proofAngle + dx * DRAG_DEG_PER_PX}deg`);
+    });
+    function endDrag(e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (drag.active) {
+        const dx = e.clientX - drag.x;
+        let steps = Math.round(dx * DRAG_DEG_PER_PX / STEP_DEG);
+        if (steps === 0 && Math.abs(dx) > 40) steps = Math.sign(dx); // short flick still moves one face
+        steps = Math.max(-2, Math.min(2, steps)); // selectProof takes the short way round, so stay under half a turn
+        proofRing.classList.remove('is-dragging');
+        suppressClick = true;
+        setTimeout(() => { suppressClick = false; });
+        selectProof(proofIndex - steps); // dragging right brings the previous face forward
+      }
+      drag = null;
+    }
+    proofStage.addEventListener('pointerup', endDrag);
+    proofStage.addEventListener('pointercancel', endDrag);
+    proofStage.addEventListener('click', (e) => { if (suppressClick) { e.preventDefault(); e.stopPropagation(); } }, true);
 
     // --- 7. LIGHTBOX ---
     const lightbox = document.getElementById('lightbox');
     const lightboxBody = document.getElementById('lightbox-body');
     document.addEventListener('click', (e) => {
-      const trigger = e.target.closest('[data-lightbox-img], [data-lightbox-video]');
+      const trigger = e.target.closest('[data-lightbox-img], [data-lightbox-video], [data-lightbox-embed], [data-lightbox-template]');
       if (!trigger) return;
+      const d = trigger.dataset;
+      const fromList = !!trigger.closest('.video-list');
       lightboxBody.replaceChildren();
-      if (trigger.dataset.lightboxImg) {
+      if (d.lightboxImg) {
         const img = document.createElement('img');
-        img.src = trigger.dataset.lightboxImg;
-        img.alt = trigger.dataset.lightboxAlt || '';
+        img.src = d.lightboxImg;
+        img.alt = d.lightboxAlt || '';
         lightboxBody.append(img);
-      } else {
+      } else if (d.lightboxVideo) {
         const video = document.createElement('video');
-        Object.assign(video, { src: trigger.dataset.lightboxVideo, controls: true, autoplay: true, playsInline: true });
+        Object.assign(video, { src: d.lightboxVideo, controls: true, autoplay: true, playsInline: true });
         lightboxBody.append(video);
+      } else if (d.lightboxEmbed) {
+        const frame = document.createElement('iframe');
+        Object.assign(frame, { src: d.lightboxEmbed, title: 'TikTok', allow: 'autoplay; fullscreen; encrypted-media', className: 'lightbox-embed' });
+        lightboxBody.append(frame);
+      } else {
+        lightboxBody.append(document.getElementById(d.lightboxTemplate).content.cloneNode(true));
+      }
+      if (fromList) {
+        const back = document.createElement('button');
+        Object.assign(back, { type: 'button', className: 'lightbox-back', textContent: '← Danh sách video' });
+        back.dataset.lightboxTemplate = 'video-list';
+        lightboxBody.prepend(back);
       }
       lenis.stop();
-      lightbox.showModal();
+      if (!lightbox.open) lightbox.showModal();
     });
     lightbox.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close());
     lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close(); }); // backdrop
