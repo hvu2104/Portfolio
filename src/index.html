@@ -295,7 +295,7 @@
     }
     .proof-face-top { display: flex; align-items: center; justify-content: space-between; }
     .proof-num { font-family: var(--font-display); font-size: 1.75rem; line-height: 1; color: var(--accent); }
-    .proof-glyph { flex: 1; display: grid; place-items: center; font-family: var(--font-display); font-size: 8.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--line-strong); transition: -webkit-text-stroke-color 600ms; }
+    .proof-glyph { flex: 1; min-height: 0; overflow: hidden; display: grid; place-items: center; font-family: var(--font-display); font-size: 8.5rem; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--line-strong); transition: -webkit-text-stroke-color 600ms; }
     .proof-face.is-active .proof-glyph { -webkit-text-stroke-color: var(--accent); }
     .proof-title { font-family: var(--font-display); font-size: 3.25rem; line-height: 1; text-transform: uppercase; letter-spacing: -0.01em; }
     .proof-face p { margin-top: 0.75rem; }
@@ -306,7 +306,7 @@
     .proof-ctas { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
     .proof-ctas .proof-cta { margin-top: 0; padding: 0.5rem 0.875rem; font-size: 0.9375rem; }
     .proof-cta.is-pending { color: var(--muted); border-style: dashed; pointer-events: none; }
-    .proof-media { flex-shrink: 0; aspect-ratio: 16/9; margin: auto 0 1.25rem; border-radius: 0.5rem; overflow: hidden; background: #000; border: 1px solid var(--line); }
+    .proof-media { flex: 0 1 auto; min-height: 0; aspect-ratio: 16/9; margin: auto 0 1.25rem; border-radius: 0.5rem; overflow: hidden; background: #000; border: 1px solid var(--line); }
     .proof-media video { width: 100%; height: 100%; object-fit: cover; }
     .proof-media.is-poster { display: block; width: 100%; aspect-ratio: 16/10; padding: 0.75rem; cursor: zoom-in; background: radial-gradient(80% 80% at 50% 40%, color-mix(in srgb, var(--accent) 25%, transparent), #000); }
     .proof-media.is-poster img { height: 100%; margin: 0 auto; border-radius: 0.25rem; box-shadow: 0 0.75rem 1.5rem rgba(0,0,0,0.6); transform: rotate(-3deg); transition: transform 500ms cubic-bezier(0.16,1,0.3,1); }
@@ -579,7 +579,7 @@
         <ul class="col-5 proof-tabs reveal-on-scroll fade-slide-up" role="tablist" aria-label="Hạng mục minh chứng">
           <li><button class="proof-tab is-active" role="tab" aria-selected="true" aria-controls="proof-face-0"><span class="proof-tab-index">01</span><div><div class="proof-tab-name">Github</div><div class="proof-tab-sub">Mã nguồn dự án</div></div><span class="proof-tab-rule"></span></button></li>
           <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-1"><span class="proof-tab-index">02</span><div><div class="proof-tab-name">Paper AI</div><div class="proof-tab-sub">Nghiên cứu khoa học</div></div><span class="proof-tab-rule"></span></button></li>
-          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-2"><span class="proof-tab-index">03</span><div><div class="proof-tab-name">Thiết kế Website</div><div class="proof-tab-sub">Sản phẩm web</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-2"><span class="proof-tab-index">03</span><div><div class="proof-tab-name">Landing page</div><div class="proof-tab-sub">Sản phẩm web</div></div><span class="proof-tab-rule"></span></button></li>
           <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-3"><span class="proof-tab-index">04</span><div><div class="proof-tab-name">Thiết kế Figma</div><div class="proof-tab-sub">UI/UX &amp; prototype</div></div><span class="proof-tab-rule"></span></button></li>
           <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-4"><span class="proof-tab-index">05</span><div><div class="proof-tab-name">Edit Video</div><div class="proof-tab-sub">Dựng &amp; hậu kỳ</div></div><span class="proof-tab-rule"></span></button></li>
           <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-5"><span class="proof-tab-index">06</span><div><div class="proof-tab-name">Thiết kế Poster</div><div class="proof-tab-sub">Ấn phẩm đồ hoạ</div></div><span class="proof-tab-rule"></span></button></li>
@@ -604,10 +604,10 @@
               </article>
               <article class="proof-face" id="proof-face-2" role="tabpanel" style="--i: 2">
                 <div class="proof-face-top"><span class="proof-num">03</span><span class="eyebrow-text">Web</span></div>
-                <div class="proof-glyph" aria-hidden="true">www</div>
-                <h3 class="proof-title">Website</h3>
-                <p class="text-body text-muted">Các website đã thiết kế và lập trình, từ giao diện đến triển khai thực tế.</p>
-                <div class="proof-ctas"><a class="proof-cta" href="https://nguyenan6002.wixstudio.com/my-site-9" target="_blank" rel="noreferrer noopener">Website 01 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://ngngocanh2806.wixstudio.com/my-site-7" target="_blank" rel="noreferrer noopener">Website 02 <span class="text-accent">↗</span></a></div>
+                <div class="proof-glyph" aria-hidden="true" style="font-size: 6rem;">www</div>
+                <h3 class="proof-title">Landing page</h3>
+                <p class="text-body text-muted">Các landing page đã thiết kế và dựng trên Wix Studio.</p>
+                <div class="proof-ctas"><a class="proof-cta" href="https://nguyenan6002.wixstudio.com/my-site-9" target="_blank" rel="noreferrer noopener">Trang 01 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://ngngocanh2806.wixstudio.com/my-site-7" target="_blank" rel="noreferrer noopener">Trang 02 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://23020234.wixstudio.com/my-site-7-copy" target="_blank" rel="noreferrer noopener">Trang 03 <span class="text-accent">↗</span></a></div>
               </article>
               <article class="proof-face" id="proof-face-3" role="tabpanel" style="--i: 3">
                 <div class="proof-face-top"><span class="proof-num">04</span><span class="eyebrow-text">UI/UX</span></div>
@@ -622,7 +622,7 @@
                   <video src="../videos/banh-bac-dau-preview.mp4" poster="../videos/banh-bac-dau-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
                 </div>
                 <h3 class="proof-title">Edit Video</h3>
-                <p class="text-body text-muted">4 video: “Love Game”, “Những đứa trẻ”, FPT Shop × TECNO Esports và “Bánh bạc đẩu”.</p>
+                <p class="text-body text-muted">4 video, nổi bật nhất là “Love Game”.</p>
                 <div class="proof-ctas"><button class="proof-cta" type="button" data-lightbox-video="../videos/love-game-pixel.mp4"><span class="text-accent">★</span> Tốt nhất</button><button class="proof-cta" type="button" data-lightbox-template="video-list">Tất cả video <span class="text-accent">(4)</span></button></div>
               </article>
               <article class="proof-face" id="proof-face-5" role="tabpanel" style="--i: 5">
