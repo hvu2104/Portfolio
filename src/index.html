@@ -324,7 +324,7 @@
     .lightbox-embed { display: block; width: min(325px, 86vw); height: min(740px, 82vh); border: 0; border-radius: 0.75rem; background: #000; }
     .lightbox-back { display: block; padding: 0.75rem 1rem; font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); transition: color 0.3s; }
     .lightbox-back:hover { color: var(--accent); }
-    .video-list { width: min(36rem, 88vw); padding: 2rem; }
+    .video-list { width: min(36rem, 88vw); max-height: 88vh; overflow-y: auto; overscroll-behavior: contain; padding: 2rem; }
     .video-list .eyebrow, .lightbox-back { padding-right: 3.5rem; } /* room for the close button */
     .video-list ul { margin-top: 1.5rem; border-top: 1px solid var(--line); }
     .video-list button { display: flex; align-items: baseline; gap: 1rem; width: 100%; padding: 1.25rem 0; border-bottom: 1px solid var(--line); text-align: left; }
@@ -622,8 +622,8 @@
                   <video src="../videos/banh-bac-dau-preview.mp4" poster="../videos/banh-bac-dau-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
                 </div>
                 <h3 class="proof-title">Edit Video</h3>
-                <p class="text-body text-muted">4 video, nổi bật nhất là “Love Game”.</p>
-                <div class="proof-ctas"><button class="proof-cta" type="button" data-lightbox-video="../videos/love-game-pixel.mp4"><span class="text-accent">★</span> Tốt nhất</button><button class="proof-cta" type="button" data-lightbox-template="video-list">Tất cả video <span class="text-accent">(4)</span></button></div>
+                <p class="text-body text-muted">7 video, nổi bật nhất là “Love Game”.</p>
+                <div class="proof-ctas"><button class="proof-cta" type="button" data-lightbox-video="../videos/love-game-pixel.mp4"><span class="text-accent">★</span> Tốt nhất</button><button class="proof-cta" type="button" data-lightbox-template="video-list">Tất cả video <span class="text-accent">(7)</span></button></div>
               </article>
               <article class="proof-face" id="proof-face-5" role="tabpanel" style="--i: 5">
                 <div class="proof-face-top"><span class="proof-num">06</span><span class="eyebrow-text">Đồ hoạ</span></div>
@@ -646,7 +646,7 @@
   </main>
 
   <!-- LIGHTBOX (certificate image / full video) -->
-  <dialog id="lightbox" class="lightbox" aria-label="Xem minh chứng">
+  <dialog id="lightbox" class="lightbox" aria-label="Xem minh chứng" data-lenis-prevent>
     <button class="lightbox-close" type="button" aria-label="Đóng">✕</button>
     <div class="lightbox-body" id="lightbox-body"></div>
   </dialog>
@@ -654,12 +654,15 @@
   <!-- Edit Video list, opened inside the lightbox -->
   <template id="video-list">
     <div class="video-list">
-      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Edit Video · 4 sản phẩm</span></div>
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Edit Video · 7 sản phẩm</span></div>
       <ul>
         <li><button type="button" data-lightbox-video="../videos/love-game-pixel.mp4"><span class="vl-num">01</span><span class="vl-title">Love Game — Sản phẩm tốt nhất</span><span class="vl-tag">★ Best</span></button></li>
         <li><button type="button" data-lightbox-video="../videos/nhung-dua-tre.mp4"><span class="vl-num">02</span><span class="vl-title">Những đứa trẻ</span><span class="vl-tag">9:16</span></button></li>
         <li><button type="button" data-lightbox-video="../videos/fpt-tecno-esports.mp4"><span class="vl-num">03</span><span class="vl-title">FPT Shop × TECNO Esports</span><span class="vl-tag">9:16</span></button></li>
-        <li><button type="button" data-lightbox-video="../videos/banh-bac-dau.mp4"><span class="vl-num">04</span><span class="vl-title">Bánh bạc đẩu</span><span class="vl-tag">16:9</span></button></li>
+        <li><button type="button" data-lightbox-video="../videos/bua-yeu-neon.mp4"><span class="vl-num">04</span><span class="vl-title">Bùa yêu neon</span><span class="vl-tag">9:16</span></button></li>
+        <li><button type="button" data-lightbox-video="../videos/landmark81-gdu.mp4"><span class="vl-num">05</span><span class="vl-title">Landmark 81 — GDU trong tôi</span><span class="vl-tag">16:9</span></button></li>
+        <li><button type="button" data-lightbox-video="../videos/guest-intro-hatrang.mp4"><span class="vl-num">06</span><span class="vl-title">Guest intro — Hà Trang</span><span class="vl-tag">16:9</span></button></li>
+        <li><button type="button" data-lightbox-video="../videos/banh-bac-dau.mp4"><span class="vl-num">07</span><span class="vl-title">Bánh bạc đẩu</span><span class="vl-tag">16:9</span></button></li>
       </ul>
     </div>
   </template>
