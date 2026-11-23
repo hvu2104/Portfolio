@@ -306,7 +306,7 @@
       position: absolute; inset: 0; display: flex; flex-direction: column; padding: 2rem; overflow: hidden;
       border-radius: 1rem; border: 1px solid var(--line-strong); cursor: pointer;
       background: radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--accent) 0%, transparent), transparent 60%), linear-gradient(160deg, var(--surface-2), var(--surface));
-      transform: rotateY(calc(var(--i) * 60deg)) translateZ(var(--r));
+      transform: rotateY(calc(var(--i) * 72deg)) translateZ(var(--r));
       backface-visibility: hidden; opacity: 0.3; transition: opacity 600ms ease-out, border-color 600ms ease-out, background 600ms ease-out;
     }
     .proof-face.is-active {
@@ -342,16 +342,22 @@
     @media (max-width: 639px) { .lightbox-close { top: 0.5rem; right: 0.5rem; } }
     .lightbox-body video { max-height: 80vh; } /* leaves room for the back button */
     .lightbox-embed { display: block; width: min(325px, 86vw); height: min(740px, 82vh); border: 0; border-radius: 0.75rem; background: #000; }
-    .lightbox-back { display: block; padding: 0.75rem 1rem; font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); transition: color 0.3s; }
-    .lightbox-back:hover { color: var(--accent); }
-    .video-list { width: min(36rem, 88vw); max-height: 88vh; overflow-y: auto; overscroll-behavior: contain; padding: 2rem; }
-    .video-list .eyebrow, .lightbox-back { padding-right: 3.5rem; } /* room for the close button */
-    .video-list ul { margin-top: 1.5rem; border-top: 1px solid var(--line); }
-    .video-list button { display: flex; align-items: baseline; gap: 1rem; width: 100%; padding: 1.25rem 0; border-bottom: 1px solid var(--line); text-align: left; }
-    .vl-num { font-size: var(--text-eyebrow); letter-spacing: 0.18em; color: var(--accent); font-variant-numeric: tabular-nums; }
-    .vl-title { flex: 1; font-size: 1.375rem; font-weight: 600; letter-spacing: -0.01em; transition: color 0.3s; }
-    .vl-tag { font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); }
-    .video-list button:hover .vl-title { color: var(--accent); }
+    /* VIDEOS */
+    .vcat { margin-top: 4rem; }
+    .vcat-count { margin-left: auto; font-family: var(--font-sans); font-size: var(--text-eyebrow); letter-spacing: 0.18em; color: var(--muted); white-space: nowrap; }
+    .vgrid { display: grid; gap: 1.25rem; margin-top: 1.5rem; }
+    .vgrid-v { grid-template-columns: repeat(auto-fill, minmax(min(10.5rem, 42vw), 1fr)); }
+    .vgrid-h { grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr)); }
+    .vcard { display: block; width: 100%; text-align: left; }
+    .vcard-media { position: relative; display: block; overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--line-strong); background: #000; aspect-ratio: 9/16; }
+    .vgrid-h .vcard-media { aspect-ratio: 16/9; }
+    .vcard-media img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: transform 600ms cubic-bezier(0.16,1,0.3,1), opacity 300ms; }
+    .vcard:hover .vcard-media img, .vcard:focus-visible .vcard-media img { transform: scale(1.05); opacity: 1; }
+    .vcard:hover .vcard-media { border-color: var(--accent); }
+    .vcard-play { position: absolute; left: 0.75rem; bottom: 0.75rem; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 9999px; background: var(--accent); color: var(--background); font-size: 0.75rem; }
+    .vcard-tag { position: absolute; top: 0.75rem; left: 0.75rem; padding: 0.25rem 0.625rem; border-radius: 9999px; background: var(--background); color: var(--accent); font-size: var(--text-eyebrow); letter-spacing: 0.12em; }
+    .vcard-title { display: block; margin-top: 0.75rem; font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; transition: color 0.3s; }
+    .vcard:hover .vcard-title { color: var(--accent); }
     .proof-controls { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
     .proof-hint { font-size: var(--text-eyebrow); text-transform: uppercase; letter-spacing: 0.22em; color: var(--accent); }
     .proof-stage { touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
@@ -399,8 +405,9 @@
         <div class="logo-text">Hoàng Vũ</div>
       </a>
       <ul class="desktop-links">
+        <li><a href="#achievements" class="nav-link">Sản phẩm</a></li>
+        <li><a href="#videos" class="nav-link">Video</a></li>
         <li><a href="#profile" class="nav-link">Hồ sơ</a></li>
-        <li><a href="#achievements" class="nav-link">Thành tích</a></li>
         <li><a href="https://www.tiktok.com/@leeminwho2104" class="nav-link text-accent" target="_blank" rel="noreferrer noopener">TikTok ↗</a></li>
       </ul>
       <button class="burger" id="burger-btn">
@@ -418,9 +425,10 @@
   <!-- MOBILE MENU -->
   <div id="mobile-menu" class="mobile-menu">
     <div class="mobile-menu-links">
-       <a href="#profile" class="mobile-link" style="transition-delay: 180ms">Hồ sơ</a>
-       <a href="#achievements" class="mobile-link" style="transition-delay: 240ms">Thành tích</a>
-       <a href="https://www.tiktok.com/@leeminwho2104" class="mobile-link text-accent" style="transition-delay: 300ms" target="_blank" rel="noreferrer noopener">TikTok ↗</a>
+       <a href="#achievements" class="mobile-link" style="transition-delay: 180ms">Sản phẩm</a>
+       <a href="#videos" class="mobile-link" style="transition-delay: 240ms">Video</a>
+       <a href="#profile" class="mobile-link" style="transition-delay: 300ms">Hồ sơ</a>
+       <a href="https://www.tiktok.com/@leeminwho2104" class="mobile-link text-accent" style="transition-delay: 360ms" target="_blank" rel="noreferrer noopener">TikTok ↗</a>
     </div>
   </div>
 
@@ -460,6 +468,123 @@
       <div class="scroll-cue fade-slide-up" style="transition-delay: 1000ms">
         <div class="scroll-rule"></div>
         Cuộn để khám phá
+      </div>
+    </section>
+
+    <section id="achievements" class="section">
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Thành tích &amp; Minh chứng</span></div>
+      <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem;">
+        <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Minh chứng</span></div>
+        <div class="reveal-line-wrap"><span class="reveal-line text-accent" style="transition-delay: 90ms">thay lời nói.</span></div>
+      </h2>
+      <p class="text-lead text-muted fade-slide-up reveal-on-scroll" style="margin-top: 2rem; max-width: 46ch;">
+        Chọn một hạng mục hoặc kéo vòng thẻ để xoay, rồi bấm “Xem minh chứng” để mở.
+      </p>
+
+      <div class="grid-12 proof-grid">
+        <ul class="col-5 proof-tabs reveal-on-scroll fade-slide-up" role="tablist" aria-label="Hạng mục minh chứng">
+          <li><button class="proof-tab is-active" role="tab" aria-selected="true" aria-controls="proof-face-0"><span class="proof-tab-index">01</span><div><div class="proof-tab-name">Github</div><div class="proof-tab-sub">Mã nguồn dự án</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-1"><span class="proof-tab-index">02</span><div><div class="proof-tab-name">Paper AI</div><div class="proof-tab-sub">Nghiên cứu khoa học</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-2"><span class="proof-tab-index">03</span><div><div class="proof-tab-name">Website</div><div class="proof-tab-sub">Landing page &amp; web dashboard</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-3"><span class="proof-tab-index">04</span><div><div class="proof-tab-name">Thiết kế Figma</div><div class="proof-tab-sub">UI/UX &amp; prototype</div></div><span class="proof-tab-rule"></span></button></li>
+          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-4"><span class="proof-tab-index">05</span><div><div class="proof-tab-name">Thiết kế Poster</div><div class="proof-tab-sub">Ấn phẩm đồ hoạ</div></div><span class="proof-tab-rule"></span></button></li>
+        </ul>
+
+        <div class="col-7 reveal-on-scroll fade-scale-in">
+          <div class="proof-stage" id="proof-stage">
+            <div class="proof-ring" id="proof-ring">
+              <article class="proof-face is-active" id="proof-face-0" role="tabpanel" style="--i: 0">
+                <div class="proof-face-top"><span class="proof-num">01</span><span class="eyebrow-text">Mã nguồn</span></div>
+                <div class="proof-glyph" aria-hidden="true">{ }</div>
+                <h3 class="proof-title">Github</h3>
+                <p class="text-body text-muted">Kho mã nguồn các dự án cá nhân, bài tập lớn và sản phẩm trong quá trình thực tập.</p>
+                <a class="proof-cta" href="https://github.com/hvu2104" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
+              </article>
+              <article class="proof-face" id="proof-face-1" role="tabpanel" style="--i: 1">
+                <div class="proof-face-top"><span class="proof-num">02</span><span class="eyebrow-text">Nghiên cứu</span></div>
+                <div class="proof-glyph" aria-hidden="true">AI</div>
+                <h3 class="proof-title">Paper AI</h3>
+                <p class="text-body text-muted">Bài báo và công trình nghiên cứu trong lĩnh vực Trí tuệ nhân tạo.</p>
+                <a class="proof-cta" href="https://drive.google.com/drive/folders/1uUAfWQvzZz_U4JRmmeS3ohRZDb_9_JTN?hl=vi" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
+              </article>
+              <article class="proof-face" id="proof-face-2" role="tabpanel" style="--i: 2">
+                <div class="proof-face-top"><span class="proof-num">03</span><span class="eyebrow-text">Web</span></div>
+                <div class="proof-glyph" aria-hidden="true" style="font-size: 6rem;">www</div>
+                <h3 class="proof-title">Website</h3>
+                <p class="text-body text-muted">Landing page trên Wix Studio và web VYRA cho UTA Asia — full-stack Node.js kèm dashboard quản trị.</p>
+                <div class="proof-ctas"><a class="proof-cta" href="https://nguyenan6002.wixstudio.com/my-site-9" target="_blank" rel="noreferrer noopener">Trang 01 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://ngngocanh2806.wixstudio.com/my-site-7" target="_blank" rel="noreferrer noopener">Trang 02 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://23020234.wixstudio.com/my-site-7-copy" target="_blank" rel="noreferrer noopener">Trang 03 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://utaasia.zcloudviet.xyz" target="_blank" rel="noreferrer noopener">Web UTA <span class="text-accent">↗</span></a><a class="proof-cta" href="https://utaasia.zcloudviet.xyz/admin" target="_blank" rel="noreferrer noopener">Dashboard UTA <span class="text-accent">↗</span></a></div>
+              </article>
+              <article class="proof-face" id="proof-face-3" role="tabpanel" style="--i: 3">
+                <div class="proof-face-top"><span class="proof-num">04</span><span class="eyebrow-text">UI/UX</span></div>
+                <div class="proof-glyph" aria-hidden="true">UI</div>
+                <h3 class="proof-title">Figma</h3>
+                <p class="text-body text-muted">Wireframe, design system và prototype tương tác trên Figma — mới nhất là app Senvielab.</p>
+                <div class="proof-ctas"><a class="proof-cta" href="https://www.figma.com/proto/MJ2YlEZJokIDidAGCOtD2z/Senvielab_app?page-id=0%3A1&amp;scaling=contain&amp;content-scaling=fixed&amp;hide-ui=1" target="_blank" rel="noreferrer noopener"><span class="text-accent">★</span> Senvielab app <span class="text-accent">↗</span></a><a class="proof-cta" href="https://www.figma.com/design/yPXs1Yepu4mPN5xHEi4PWl/HVSinh-Remake?t=tDBVrInwYkALdo4g-1" target="_blank" rel="noreferrer noopener">HVSinh Remake <span class="text-accent">↗</span></a></div>
+              </article>
+              <article class="proof-face" id="proof-face-4" role="tabpanel" style="--i: 4">
+                <div class="proof-face-top"><span class="proof-num">05</span><span class="eyebrow-text">Đồ hoạ</span></div>
+                <button class="proof-media is-poster" type="button" data-lightbox-img="../images/posters/logic-sang-tao.jpg" data-lightbox-alt="Poster “Logic × Sáng tạo”" aria-label="Phóng to poster">
+                  <img src="../images/posters/logic-sang-tao-thumb.jpg" alt="" loading="lazy" />
+                </button>
+                <h3 class="proof-title">Poster</h3>
+                <p class="text-body text-muted">Poster “Logic × Sáng tạo”.</p>
+                <button class="proof-cta" type="button" data-lightbox-img="../images/posters/logic-sang-tao.jpg" data-lightbox-alt="Poster “Logic × Sáng tạo”">Xem poster <span class="text-accent">↗</span></button>
+              </article>
+            </div>
+          </div>
+          <div class="proof-controls">
+            <span class="proof-hint" aria-hidden="true">← Kéo để xoay →</span>
+            <span class="proof-counter" id="proof-counter">01 / 05</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEOS -->
+    <section id="videos" class="section">
+      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Edit Video · 21 sản phẩm</span></div>
+      <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem;">
+        <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Video</span></div>
+        <div class="reveal-line-wrap"><span class="reveal-line text-accent" style="transition-delay: 90ms">đã dựng.</span></div>
+      </h2>
+
+      <div class="vcat reveal-on-scroll fade-slide-up">
+        <h3 class="block-title"><span class="block-title-num">A</span>Motion graphic &amp; animation <span class="vcat-count">04 · 9:16</span></h3>
+        <ul class="vgrid vgrid-v">
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/love-game-pixel.mp4"><span class="vcard-media"><img src="../videos/thumbs/love-game-pixel.jpg" alt="" loading="lazy" /><span class="vcard-tag">★ Best</span><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Love Game</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/senvielab-to-chuc-bi-an.mp4"><span class="vcard-media"><img src="../videos/thumbs/senvielab-to-chuc-bi-an.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">SenvieLab — Tổ chức bí ẩn</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/senvielab-every-skin-story.mp4"><span class="vcard-media"><img src="../videos/thumbs/senvielab-every-skin-story.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">SenvieLab — Every skin story</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/bua-yeu-neon.mp4"><span class="vcard-media"><img src="../videos/thumbs/bua-yeu-neon.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Bùa yêu neon</span></button></li>
+        </ul>
+      </div>
+
+      <div class="vcat reveal-on-scroll fade-slide-up">
+        <h3 class="block-title"><span class="block-title-num">B</span>TikTok &amp; quảng cáo <span class="vcat-count">07 · 9:16</span></h3>
+        <ul class="vgrid vgrid-v">
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/duachuot-holafresh.mp4"><span class="vcard-media"><img src="../videos/thumbs/duachuot-holafresh.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Dưa chuột Holafresh</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/squishy-si.mp4"><span class="vcard-media"><img src="../videos/thumbs/squishy-si.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Squishy sỉ</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/fpt-tecno-esports.mp4"><span class="vcard-media"><img src="../videos/thumbs/fpt-tecno-esports.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">FPT Shop × TECNO Esports</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/first-job-tiktok.mp4"><span class="vcard-media"><img src="../videos/thumbs/first-job-tiktok.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">3 triệu đầu tiên &amp; 2 job remote</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/anh-chi-la-nguoi-thay-the.mp4"><span class="vcard-media"><img src="../videos/thumbs/anh-chi-la-nguoi-thay-the.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Anh chỉ là người thay thế</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/quy-tac-truc-dem-tap-1.mp4"><span class="vcard-media"><img src="../videos/thumbs/quy-tac-truc-dem-tap-1.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Quy tắc trực đêm — Tập 1</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/nhung-dua-tre.mp4"><span class="vcard-media"><img src="../videos/thumbs/nhung-dua-tre.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Những đứa trẻ</span></button></li>
+        </ul>
+      </div>
+
+      <div class="vcat reveal-on-scroll fade-slide-up">
+        <h3 class="block-title"><span class="block-title-num">C</span>Phóng sự, sự kiện &amp; vlog <span class="vcat-count">10 · 16:9</span></h3>
+        <ul class="vgrid vgrid-h">
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/ninh-binh.mp4"><span class="vcard-media"><img src="../videos/thumbs/ninh-binh.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Ninh Bình</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/bat-trang.mp4"><span class="vcard-media"><img src="../videos/thumbs/bat-trang.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Bát Tràng</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/sai-gon-trong-toi.mp4"><span class="vcard-media"><img src="../videos/thumbs/sai-gon-trong-toi.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Sài Gòn trong tôi</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/landmark81-gdu.mp4"><span class="vcard-media"><img src="../videos/thumbs/landmark81-gdu.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Landmark 81 — GDU trong tôi</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/han-bac-ho.mp4"><span class="vcard-media"><img src="../videos/thumbs/han-bac-ho.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Bác Hồ</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/halftime.mp4"><span class="vcard-media"><img src="../videos/thumbs/halftime.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Halftime</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/fen.mp4"><span class="vcard-media"><img src="../videos/thumbs/fen.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Fen</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/cv-ha-trang.mp4"><span class="vcard-media"><img src="../videos/thumbs/cv-ha-trang.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">CV — Hà Trang</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/guest-intro-hatrang.mp4"><span class="vcard-media"><img src="../videos/thumbs/guest-intro-hatrang.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Guest intro — Hà Trang</span></button></li>
+          <li><button class="vcard" type="button" data-lightbox-video="../videos/banh-bac-dau.mp4"><span class="vcard-media"><img src="../videos/thumbs/banh-bac-dau.jpg" alt="" loading="lazy" /><span class="vcard-play" aria-hidden="true">▶</span></span><span class="vcard-title">Bánh bạc đẩu</span></button></li>
+        </ul>
       </div>
     </section>
 
@@ -564,8 +689,8 @@
                 <div class="exp-bar" style="--p: 0.25"></div>
               </li>
               <li class="exp-row reveal-on-scroll fade-slide-up">
-                <div class="exp-head"><span class="exp-role">Editor</span><span class="exp-dur">1 tháng</span></div>
-                <div class="exp-bar" style="--p: 0.0833"></div>
+                <div class="exp-head"><span class="exp-role">Editor</span><span class="exp-dur">3 tháng</span></div>
+                <div class="exp-bar" style="--p: 0.25"></div>
               </li>
             </ul>
           </div>
@@ -593,84 +718,6 @@
     </section>
 
     <!-- ACHIEVEMENTS -->
-    <section id="achievements" class="section">
-      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Thành tích &amp; Minh chứng</span></div>
-      <h2 class="section-heading-font font-display uppercase text-foreground reveal-on-scroll" style="margin-top: 1.5rem;">
-        <div class="reveal-line-wrap"><span class="reveal-line" style="transition-delay: 0ms">Minh chứng</span></div>
-        <div class="reveal-line-wrap"><span class="reveal-line text-accent" style="transition-delay: 90ms">thay lời nói.</span></div>
-      </h2>
-      <p class="text-lead text-muted fade-slide-up reveal-on-scroll" style="margin-top: 2rem; max-width: 46ch;">
-        Chọn một hạng mục hoặc kéo vòng thẻ để xoay, rồi bấm “Xem minh chứng” để mở.
-      </p>
-
-      <div class="grid-12 proof-grid">
-        <ul class="col-5 proof-tabs reveal-on-scroll fade-slide-up" role="tablist" aria-label="Hạng mục minh chứng">
-          <li><button class="proof-tab is-active" role="tab" aria-selected="true" aria-controls="proof-face-0"><span class="proof-tab-index">01</span><div><div class="proof-tab-name">Github</div><div class="proof-tab-sub">Mã nguồn dự án</div></div><span class="proof-tab-rule"></span></button></li>
-          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-1"><span class="proof-tab-index">02</span><div><div class="proof-tab-name">Paper AI</div><div class="proof-tab-sub">Nghiên cứu khoa học</div></div><span class="proof-tab-rule"></span></button></li>
-          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-2"><span class="proof-tab-index">03</span><div><div class="proof-tab-name">Landing page</div><div class="proof-tab-sub">Sản phẩm web</div></div><span class="proof-tab-rule"></span></button></li>
-          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-3"><span class="proof-tab-index">04</span><div><div class="proof-tab-name">Thiết kế Figma</div><div class="proof-tab-sub">UI/UX &amp; prototype</div></div><span class="proof-tab-rule"></span></button></li>
-          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-4"><span class="proof-tab-index">05</span><div><div class="proof-tab-name">Edit Video</div><div class="proof-tab-sub">Dựng &amp; hậu kỳ</div></div><span class="proof-tab-rule"></span></button></li>
-          <li><button class="proof-tab" role="tab" aria-selected="false" aria-controls="proof-face-5"><span class="proof-tab-index">06</span><div><div class="proof-tab-name">Thiết kế Poster</div><div class="proof-tab-sub">Ấn phẩm đồ hoạ</div></div><span class="proof-tab-rule"></span></button></li>
-        </ul>
-
-        <div class="col-7 reveal-on-scroll fade-scale-in">
-          <div class="proof-stage" id="proof-stage">
-            <div class="proof-ring" id="proof-ring">
-              <article class="proof-face is-active" id="proof-face-0" role="tabpanel" style="--i: 0">
-                <div class="proof-face-top"><span class="proof-num">01</span><span class="eyebrow-text">Mã nguồn</span></div>
-                <div class="proof-glyph" aria-hidden="true">{ }</div>
-                <h3 class="proof-title">Github</h3>
-                <p class="text-body text-muted">Kho mã nguồn các dự án cá nhân, bài tập lớn và sản phẩm trong quá trình thực tập.</p>
-                <a class="proof-cta" href="https://github.com/hvu2104" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
-              </article>
-              <article class="proof-face" id="proof-face-1" role="tabpanel" style="--i: 1">
-                <div class="proof-face-top"><span class="proof-num">02</span><span class="eyebrow-text">Nghiên cứu</span></div>
-                <div class="proof-glyph" aria-hidden="true">AI</div>
-                <h3 class="proof-title">Paper AI</h3>
-                <p class="text-body text-muted">Bài báo và công trình nghiên cứu trong lĩnh vực Trí tuệ nhân tạo.</p>
-                <a class="proof-cta" href="https://drive.google.com/drive/folders/1uUAfWQvzZz_U4JRmmeS3ohRZDb_9_JTN?hl=vi" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
-              </article>
-              <article class="proof-face" id="proof-face-2" role="tabpanel" style="--i: 2">
-                <div class="proof-face-top"><span class="proof-num">03</span><span class="eyebrow-text">Web</span></div>
-                <div class="proof-glyph" aria-hidden="true" style="font-size: 6rem;">www</div>
-                <h3 class="proof-title">Landing page</h3>
-                <p class="text-body text-muted">Các landing page đã thiết kế và dựng trên Wix Studio.</p>
-                <div class="proof-ctas"><a class="proof-cta" href="https://nguyenan6002.wixstudio.com/my-site-9" target="_blank" rel="noreferrer noopener">Trang 01 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://ngngocanh2806.wixstudio.com/my-site-7" target="_blank" rel="noreferrer noopener">Trang 02 <span class="text-accent">↗</span></a><a class="proof-cta" href="https://23020234.wixstudio.com/my-site-7-copy" target="_blank" rel="noreferrer noopener">Trang 03 <span class="text-accent">↗</span></a></div>
-              </article>
-              <article class="proof-face" id="proof-face-3" role="tabpanel" style="--i: 3">
-                <div class="proof-face-top"><span class="proof-num">04</span><span class="eyebrow-text">UI/UX</span></div>
-                <div class="proof-glyph" aria-hidden="true">UI</div>
-                <h3 class="proof-title">Figma</h3>
-                <p class="text-body text-muted">Wireframe, design system và prototype tương tác trên Figma.</p>
-                <a class="proof-cta" href="https://www.figma.com/design/yPXs1Yepu4mPN5xHEi4PWl/HVSinh-Remake?t=tDBVrInwYkALdo4g-1" target="_blank" rel="noreferrer noopener">Xem minh chứng <span class="text-accent">↗</span></a>
-              </article>
-              <article class="proof-face" id="proof-face-4" role="tabpanel" style="--i: 4">
-                <div class="proof-face-top"><span class="proof-num">05</span><span class="eyebrow-text">Video</span></div>
-                <div class="proof-media">
-                  <video src="../videos/banh-bac-dau-preview.mp4" poster="../videos/banh-bac-dau-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
-                </div>
-                <h3 class="proof-title">Edit Video</h3>
-                <p class="text-body text-muted">7 video, nổi bật nhất là “Love Game”.</p>
-                <div class="proof-ctas"><button class="proof-cta" type="button" data-lightbox-video="../videos/love-game-pixel.mp4"><span class="text-accent">★</span> Tốt nhất</button><button class="proof-cta" type="button" data-lightbox-template="video-list">Tất cả video <span class="text-accent">(7)</span></button></div>
-              </article>
-              <article class="proof-face" id="proof-face-5" role="tabpanel" style="--i: 5">
-                <div class="proof-face-top"><span class="proof-num">06</span><span class="eyebrow-text">Đồ hoạ</span></div>
-                <button class="proof-media is-poster" type="button" data-lightbox-img="../images/posters/logic-sang-tao.jpg" data-lightbox-alt="Poster “Logic × Sáng tạo”" aria-label="Phóng to poster">
-                  <img src="../images/posters/logic-sang-tao-thumb.jpg" alt="" loading="lazy" />
-                </button>
-                <h3 class="proof-title">Poster</h3>
-                <p class="text-body text-muted">Poster “Logic × Sáng tạo”.</p>
-                <button class="proof-cta" type="button" data-lightbox-img="../images/posters/logic-sang-tao.jpg" data-lightbox-alt="Poster “Logic × Sáng tạo”">Xem poster <span class="text-accent">↗</span></button>
-              </article>
-            </div>
-          </div>
-          <div class="proof-controls">
-            <span class="proof-hint" aria-hidden="true">← Kéo để xoay →</span>
-            <span class="proof-counter" id="proof-counter">01 / 06</span>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- LIGHTBOX (certificate image / full video) -->
@@ -679,21 +726,6 @@
     <div class="lightbox-body" id="lightbox-body"></div>
   </dialog>
 
-  <!-- Edit Video list, opened inside the lightbox -->
-  <template id="video-list">
-    <div class="video-list">
-      <div class="eyebrow"><span class="eyebrow-dot"></span><span class="eyebrow-text">Edit Video · 7 sản phẩm</span></div>
-      <ul>
-        <li><button type="button" data-lightbox-video="../videos/love-game-pixel.mp4"><span class="vl-num">01</span><span class="vl-title">Love Game — Sản phẩm tốt nhất</span><span class="vl-tag">★ Best</span></button></li>
-        <li><button type="button" data-lightbox-video="../videos/nhung-dua-tre.mp4"><span class="vl-num">02</span><span class="vl-title">Những đứa trẻ</span><span class="vl-tag">9:16</span></button></li>
-        <li><button type="button" data-lightbox-video="../videos/fpt-tecno-esports.mp4"><span class="vl-num">03</span><span class="vl-title">FPT Shop × TECNO Esports</span><span class="vl-tag">9:16</span></button></li>
-        <li><button type="button" data-lightbox-video="../videos/bua-yeu-neon.mp4"><span class="vl-num">04</span><span class="vl-title">Bùa yêu neon</span><span class="vl-tag">9:16</span></button></li>
-        <li><button type="button" data-lightbox-video="../videos/landmark81-gdu.mp4"><span class="vl-num">05</span><span class="vl-title">Landmark 81 — GDU trong tôi</span><span class="vl-tag">16:9</span></button></li>
-        <li><button type="button" data-lightbox-video="../videos/guest-intro-hatrang.mp4"><span class="vl-num">06</span><span class="vl-title">Guest intro — Hà Trang</span><span class="vl-tag">16:9</span></button></li>
-        <li><button type="button" data-lightbox-video="../videos/banh-bac-dau.mp4"><span class="vl-num">07</span><span class="vl-title">Bánh bạc đẩu</span><span class="vl-tag">16:9</span></button></li>
-      </ul>
-    </div>
-  </template>
 
   <script type="module">
     import Lenis from "lenis";
@@ -887,7 +919,6 @@
       const trigger = e.target.closest('[data-lightbox-img], [data-lightbox-video], [data-lightbox-embed], [data-lightbox-template]');
       if (!trigger) return;
       const d = trigger.dataset;
-      const fromList = !!trigger.closest('.video-list');
       lightboxBody.replaceChildren();
       if (d.lightboxImg) {
         const img = document.createElement('img');
@@ -904,12 +935,6 @@
         lightboxBody.append(frame);
       } else {
         lightboxBody.append(document.getElementById(d.lightboxTemplate).content.cloneNode(true));
-      }
-      if (fromList) {
-        const back = document.createElement('button');
-        Object.assign(back, { type: 'button', className: 'lightbox-back', textContent: '← Danh sách video' });
-        back.dataset.lightboxTemplate = 'video-list';
-        lightboxBody.prepend(back);
       }
       lenis.stop();
       if (!lightbox.open) lightbox.showModal();
